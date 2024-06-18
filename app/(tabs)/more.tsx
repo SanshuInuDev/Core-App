@@ -1,6 +1,6 @@
 import { Image, StyleSheet, View } from 'react-native';
 
-export default function Menu() {
+export default function More() {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
