@@ -1,64 +1,52 @@
-import FontAwesome from '@expo/vector-icons/FontAwesome';
+import Colors from '@/lib/Colors';
+import { LinearGradient } from 'expo-linear-gradient';
 import { Tabs } from 'expo-router';
+import RadixIcon from '@/components/RadixIcon';
 import React from 'react';
-import { StyleSheet, Image, View } from 'react-native';
-
-import { useColorScheme } from '@/components/useColorScheme';
-import Colors from '@/constants/Colors';
-
+import { StyleSheet } from 'react-native';
 
 // You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
-function TabBarIcon(props: {
-  name: React.ComponentProps<typeof FontAwesome>['name'];
-  color: string;
-}) {
-  return <FontAwesome size={28} style={{ marginBottom: -3 }} {...props} />;
-}
-
 export default function TabLayout() {
-  const colorScheme = useColorScheme();
 
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
+        tabBarActiveTintColor: Colors.tint,
         headerShown: false,
         tabBarStyle: styles.tab,
+        tabBarBackground: () => <LinearGradient
+          // Background Linear Gradient
+          className='flex-1'
+          colors={['rgba(13,5,8,0.2)', 'rgba(0,0,0,1)']}
+        />
+
       }}>
       <Tabs.Screen
         name="index"
         options={{
           title: 'Market',
-          tabBarIcon: ({ color }) => <Image
-            source={require('@/assets/images/magic-wand.png')}
-          />
+          tabBarIcon: ({ color }) => <RadixIcon name="magic-wand" size={20} color={color ?? 'white'} />
         }}
       />
       <Tabs.Screen
         name="watching"
         options={{
           title: 'Watching',
-          tabBarIcon: ({ color, }) => <Image
-            source={require('@/assets/images/target.png')}
-          />
+          tabBarIcon: ({ color, }) => <RadixIcon name="target" size={20} color={color ?? 'white'} />
         }}
       />
       <Tabs.Screen
         name="portfolio"
         options={{
           title: 'Portfolio',
-          tabBarIcon: ({ color }) => <Image
-            source={require('@/assets/images/eye-open.png')}
-          />
+          tabBarIcon: ({ color }) => <RadixIcon name="eye-open" size={20} color={color ?? 'white'} />
         }}
       />
       <Tabs.Screen
-        name="menu"
+        name="more"
         options={{
-          title: 'Menu',
-          tabBarIcon: ({ color }) => <Image
-            source={require('@/assets/images/hamburger-menu.png')}
-          />,
+          title: 'More',
+          tabBarIcon: ({ color }) => <RadixIcon name="hamburger-menu" size={20} color={color ?? 'white'} />
         }}
       />
     </Tabs>

@@ -1,9 +1,9 @@
 import { Image, View } from 'react-native';
 
-export default function Portfolio() {
+export default function More() {
   return (
-    <View>
-      <View>
+    <View >
+      <View className='mt-4 ml-4'>
         <Image
           source={require('@/assets/images/Logo.png')}
         />

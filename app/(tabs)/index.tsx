@@ -1,159 +1,44 @@
-import Colors from '@/constants/Colors';
-import { Image, StyleSheet, View, Text, ScrollView } from 'react-native';
+import Discover from '@/components/market/Discover';
+import FeaturedDApps from '@/components/market/FeaturedDApps';
+import GlobalMarketCap from '@/components/market/GlobalMarketCap';
+import LatestCrypto from '@/components/market/LatestCrypto';
+import TopMovers from '@/components/market/TopMovers';
+import TrendingSocial from '@/components/market/TrendingSocial';
+import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import { SheetManager } from 'react-native-actions-sheet';
+import RadixIcon from '@/components/RadixIcon';
 
 export default function TabOneScreen() {
   return (
-    <ScrollView style={styles.container}>
-      <View style={styles.header}>
+    <ScrollView className='px-6 py-12 bg-base100'>
+      <View className='flex-row items-center justify-between'>
         <Image
           source={require('@/assets/images/Logo.png')}
         />
-        <Image
-          source={require('@/assets/images/magnifying-glass.png')}
-        />
+        <TouchableOpacity onPress={() => {
+          SheetManager.show('discover-sheet')
+        }}>
+          <View className='p-2 rounded-full'>
+            <RadixIcon name="magnifying-glass" size={20} color={'white'} />
+          </View>
+        </TouchableOpacity>
       </View>
-      <View style={styles.spacer} />
+      <View className='h-8' />
       <View>
-        <Text style={styles.mainTitle}>Market</Text>
-        <View style={styles.mainTitleDes}>
-          <Text style={styles.mainTitleDesLeft}>Global Market Cap </Text>
-          <Text style={styles.mainTitleDesRight}> $2.38T (0.03%) </Text>
-        </View>
+        <Text className='text-white font-midnight-sans-st-48 text-7.5'>Market</Text>
+        <GlobalMarketCap />
       </View>
-      <View style={styles.spacer} />
-      <View>
-        <Text style={styles.subTitle}>Featured dApps</Text>
-        <View style={styles.dappList}>
-          <View style={styles.dappItem}>
-            <Image
-              source={require('@/assets/images/zora.png')}
-            />
-            <Text style={styles.dappTitle}>Zora</Text>
-          </View>
-          <View style={styles.dappItem}>
-            <Image
-              source={require('@/assets/images/Crypto.png')}
-            />
-            <Text style={styles.dappTitle}>Galve</Text>
-          </View>
-          <View style={styles.dappItem}>
-            <Image
-              source={require('@/assets/images/OpenSea.png')}
-            />
-            <Text style={styles.dappTitle}>OpenSea</Text>
-          </View>
-          <View style={styles.dappItem}>
-            <Image
-              source={require('@/assets/images/Element.png')}
-            />
-            <Text style={styles.dappTitle}>Element</Text>
-          </View>
-          <View style={styles.dappItem}>
-            <Image
-              source={require('@/assets/images/Jumper.png')}
-            />
-            <Text style={styles.dappTitle}>Jumper</Text>
-          </View>
-        </View>
-      </View>
-      <View style={styles.spacer} />
-      <View>
-        <Text style={styles.subTitle} >Top Movers </Text>
-        <View style={styles.moverList}>
-          <View style={styles.moverItem}>
-            <Image
-              source={require('@/assets/images/bitcoin.png')}
-            />
-            <Text style={styles.dappTitle}>Bitcoin</Text>
-            <Text style={styles.moverPrice}>$68,678.61</Text>
-            <Text style={styles.moverRate}>2.54%</Text>
-          </View>
-          <View style={styles.moverItem}>
-            <Image
-              source={require('@/assets/images/Ethereum.png')}
-            />
-            <Text style={styles.dappTitle}>Ethereum</Text>
-            <Text style={styles.moverPrice}>$1,678.61</Text>
-            <Text style={styles.moverRate}>3.54%</Text>
-          </View>
-          <View style={styles.moverItem}>
-            <Image
-              source={require('@/assets/images/Atops.png')}
-            />
-            <Text style={styles.dappTitle}>Atops</Text>
-            <Text style={styles.moverPrice}>$1.01</Text>
-            <Text style={styles.moverRate}>0.04%</Text>
-          </View>
-          <View style={styles.moverItem}>
-            <Image
-              source={require('@/assets/images/Doge.png')}
-            />
-            <Text style={styles.dappTitle}>Bitcoin</Text>
-            <Text style={styles.moverPrice}>$68,678.61</Text>
-            <Text style={styles.moverRate}>2.54%</Text>
-          </View>
-        </View>
-      </View>
+      <View className='h-8' />
+      <FeaturedDApps />
+      <View className='h-8' />
+      <TopMovers />
+      <View className='h-8' />
+      <Discover />
+      <View className='h-8' />
+      <LatestCrypto />
+      <View className='h-8' />
+      <TrendingSocial />
+      <View className='h-32' />
     </ScrollView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingHorizontal: 24,
-    paddingTop: 48,
-    backgroundColor: Colors.light.background
-  },
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between'
-  },
-  spacer: {
-    height: 32
-  },
-  mainTitle: {
-    color: Colors.light.text,
-    fontSize: 30
-  },
-  mainTitleDes: {
-    flexDirection: 'row',
-  },
-  mainTitleDesLeft: {
-    color: Colors.light.text
-  },
-  mainTitleDesRight: {
-    color: '#79D64D'
-  },
-  subTitle: {
-    color: Colors.light.text,
-    fontSize: 20
-  },
-  dappList: {
-    marginTop: 16,
-    flexDirection: 'row',
-    gap: 24
-  },
-  dappTitle: {
-    marginTop: 8,
-    color: Colors.light.text,
-  },
-  dappItem: {
-    alignItems: 'center'
-  },
-  moverList: {
-    marginTop: 16,
-    flexDirection: 'row',
-    gap: 8
-  },
-  moverItem: {
-    minWidth: 70
-  },
-  moverPrice: {
-    color: Colors.light.text,
-    opacity: 0.4
-  },
-  moverRate: {
-    color: '#79D64D'
-  }
-});
