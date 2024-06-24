@@ -1,23 +1,3 @@
-export interface TrendingCoin {
-  item: {
-    id: string
-    coin_id: number
-    name: string
-    symbol: string
-    market_cap_rank: number
-    thumb: string
-    small: string
-    large: string
-    slug: string
-    price_btc: number
-    score: number
-  }
-}
-
-export interface TrendingResponse {
-  coins: TrendingCoin[]
-  exchanges: any[] // You can define this further based on your needs
-}
 
 export interface CoinMarket {
   id: string
@@ -52,7 +32,7 @@ export interface CoinMarket {
   last_updated: string
 }
 
-export interface CryptoPanicApiResponse {
+export interface CryptoNewsResponse {
   count: number
   next: string | null
   previous: string | null

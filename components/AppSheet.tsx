@@ -1,5 +1,6 @@
 import Colors from '@/lib/Colors';
 import React, { useRef } from 'react';
+import { View } from 'react-native';
 import ActionSheet, {
   ActionSheetRef,
   SheetProps,
@@ -25,14 +26,17 @@ export default function AppSheet({ provider, children }: Props) {
         backgroundColor: Colors.base100
       }}
       indicatorStyle={{
+        marginTop: 8,
         width: 20,
         height: 1,
         backgroundColor: Colors.gray
       }}
       gestureEnabled={true}>
-      {
-        children
-      }
+      <View className='px-6 pt-6'>
+        {
+          children
+        }
+      </View>
     </ActionSheet>
   );
 }

@@ -1,16 +1,9 @@
+import { NewsArticle } from "@/lib/cryptopanic/types";
 import { Image, Text, View } from "react-native";
 
-export interface CryptoNews {
-  domain: string
-  source: {
-    title: string
-  },
-  title: string
-  published_at: string
-}
 
 interface Props {
-  data: CryptoNews
+  data: NewsArticle
 }
 
 export default function LatestCryptoItem({ data }: Props) {

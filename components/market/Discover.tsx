@@ -4,23 +4,15 @@ import { useCallback, useEffect, useState } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import { SheetManager } from 'react-native-actions-sheet';
 import DiscoverItem from './DiscoverItem';
+import { useQuery } from "@tanstack/react-query";
+import { fetchCoinsByMarketCap } from '@/lib/coingecko';
 
 export default function Discover() {
-  const [discovers, setDiscovers] = useState<CoinMarket[]>([])
-
-  const loadData = useCallback(async () => {
-    try {
-      const fetchData = await fetch("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10")
-      const json = await fetchData.json() as CoinMarket[]
-      setDiscovers(json)
-    } catch (error) {
-      console.log(error)
-    }
-  }, [])
-
-  useEffect(() => {
-    loadData()
-  }, [])
+  const { data } = useQuery({
+    queryKey: ['marketCap'],
+    queryFn: fetchCoinsByMarketCap
+  })
+  
   return <View>
     <View className='flex-row items-center'>
       <Text className='flex-1 text-white font-midnight-sans-st-36 text-5'>Discover</Text>
@@ -36,7 +28,7 @@ export default function Discover() {
     </View>
     <View className='mt-4'>
       {
-        discovers?.map((item, idx) => (
+        data?.map((item, idx) => (
           <DiscoverItem key={idx} no={idx + 1} data={item} />
         ))
       }

@@ -1,27 +1,19 @@
+import SanshuLogo from '@/components/common/SanshuLogo';
+import SearchButton from '@/components/common/SearchButton';
 import Discover from '@/components/market/Discover';
 import FeaturedDApps from '@/components/market/FeaturedDApps';
 import GlobalMarketCap from '@/components/market/GlobalMarketCap';
 import LatestCrypto from '@/components/market/LatestCrypto';
 import TopMovers from '@/components/market/TopMovers';
 import TrendingSocial from '@/components/market/TrendingSocial';
-import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
-import { SheetManager } from 'react-native-actions-sheet';
-import RadixIcon from '@/components/RadixIcon';
+import { ScrollView, Text, View } from 'react-native';
 
 export default function TabOneScreen() {
   return (
     <ScrollView className='px-6 py-12 bg-base100'>
       <View className='flex-row items-center justify-between'>
-        <Image
-          source={require('@/assets/images/Logo.png')}
-        />
-        <TouchableOpacity onPress={() => {
-          SheetManager.show('discover-sheet')
-        }}>
-          <View className='p-2 rounded-full'>
-            <RadixIcon name="magnifying-glass" size={20} color={'white'} />
-          </View>
-        </TouchableOpacity>
+        <SanshuLogo />
+        <SearchButton id='market-search-sheet' />
       </View>
       <View className='h-8' />
       <View>

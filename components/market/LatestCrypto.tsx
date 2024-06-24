@@ -4,10 +4,7 @@ import { useCallback, useEffect, useState } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import { SheetManager } from "react-native-actions-sheet";
 import LatestCryptoItem, { CryptoNews } from "./LatestCryptoItem";
-
-interface CryptoNewsResponse {
-  results: CryptoNews[]
-}
+import { LatestNewsResponse } from '@/lib/cryptopanic/types';
 
 export default function LatestCrypto() {
   const [news, setNews] = useState<CryptoNews[]>([])
@@ -18,8 +15,8 @@ export default function LatestCrypto() {
 
   const loadData = useCallback(async () => {
     try {
-      const fetchData = await fetch("https://cryptopanic.com/api/v1/posts/?auth_token=54b9c4ec5db577b00bc094d840c7fdf181d5dd91&kind=news&count=3")
-      const json = await fetchData.json() as CryptoNewsResponse
+      const fetchData = await fetch("/api/news")
+      const json = await fetchData.json() as LatestNewsResponse
       setNews(json.results.slice(0, 3))
     } catch (error) {
       console.error(error)

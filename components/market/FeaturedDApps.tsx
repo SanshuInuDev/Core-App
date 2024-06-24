@@ -1,27 +1,13 @@
-import { TrendingResponse } from "@/lib/types";
-import { useCallback, useEffect, useState } from "react";
+import { fetchTrendingData } from "@/lib/coingecko";
+import { useQuery } from "@tanstack/react-query";
 import { ScrollView, Text, View } from "react-native";
 import DAppItem from "./DAppItem";
 
 export default function FeaturedDApps() {
-  const [dApps, setDApps] = useState<TrendingResponse>({
-    coins: [],
-    exchanges: []
+  const { data } = useQuery({
+    queryKey: ['trending'],
+    queryFn: fetchTrendingData
   })
-
-  const loadData = useCallback(async () => {
-    try {
-      const fetchData = await fetch("https://api.coingecko.com/api/v3/search/trending")
-      const json = await fetchData.json() as TrendingResponse
-      setDApps(json)
-    } catch (error) {
-      console.log(error)
-    }
-  }, [])
-
-  useEffect(() => {
-    loadData()
-  }, [])
 
   return (
     <View>
@@ -32,7 +18,7 @@ export default function FeaturedDApps() {
         className="pt-4">
         <View className="flex-row">
           {
-            dApps.coins.map(coin => {
+            data?.map(coin => {
               return (
                 <DAppItem
                   key={coin.item.id}

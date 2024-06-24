@@ -1,15 +1,18 @@
 import { useColorScheme } from '@/components/useColorScheme';
 import '@/lib/sheets';
+import { IntlProvider } from 'react-intl';
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { NativeWindStyleSheet } from "nativewind";
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { StyleSheet } from 'react-native';
 import { SheetProvider } from 'react-native-actions-sheet';
 import 'react-native-reanimated';
 import { SafeAreaView } from 'react-native-safe-area-context';
+
 
 // export {
 //   // Catch any errors thrown by the Layout component.
@@ -39,6 +42,8 @@ export default function RootLayout() {
     "midnight-sans-st-48-regular-pro": require('@/assets/fonts/midnight-sans-st-48-regular-pro.ttf'),
   });
 
+  const queryClient = new QueryClient();
+
   // Expo Router uses Error Boundaries to catch errors in the navigation tree.
   useEffect(() => {
     if (error) throw error;
@@ -54,7 +59,13 @@ export default function RootLayout() {
     return null;
   }
 
-  return <RootLayoutNav />;
+  return (
+    <QueryClientProvider client={queryClient}>
+      <IntlProvider locale="en">
+        <RootLayoutNav />
+      </IntlProvider>
+    </QueryClientProvider>
+  )
 }
 
 function RootLayoutNav() {
