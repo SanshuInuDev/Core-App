@@ -1,28 +1,16 @@
 
 import RadixIcon from '@/components/RadixIcon';
-import { useCallback, useEffect, useState } from "react";
+import { fetchLatestNews } from '@/lib/fetcher/client';
+import { useQuery } from '@tanstack/react-query';
 import { Text, TouchableOpacity, View } from "react-native";
 import { SheetManager } from "react-native-actions-sheet";
-import LatestCryptoItem, { CryptoNews } from "./LatestCryptoItem";
-import { LatestNewsResponse } from '@/lib/cryptopanic/types';
+import LatestCryptoItem from "./LatestCryptoItem";
 
 export default function LatestCrypto() {
-  const [news, setNews] = useState<CryptoNews[]>([])
-
-  useEffect(() => {
-    loadData()
-  }, [])
-
-  const loadData = useCallback(async () => {
-    try {
-      const fetchData = await fetch("/api/news")
-      const json = await fetchData.json() as LatestNewsResponse
-      setNews(json.results.slice(0, 3))
-    } catch (error) {
-      console.error(error)
-    }
-  }, [])
-
+  const { data } = useQuery({
+    queryKey: ['latestNews'],
+    queryFn: fetchLatestNews
+  })
   return <View>
     <View className='flex-row items-center'>
       <Text className='flex-1 text-white text-5 font-midnight-sans-st-36' >Latest in crypto</Text>
@@ -38,7 +26,7 @@ export default function LatestCrypto() {
     </View>
     <View className='mt-4'>
       {
-        news?.map((item, idx) => <LatestCryptoItem key={idx} data={item} />)
+        data?.results?.slice(0, 3)?.map((item, idx) => <LatestCryptoItem key={idx} data={item} />)
       }
     </View>
   </View>

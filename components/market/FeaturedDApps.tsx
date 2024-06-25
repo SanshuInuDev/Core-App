@@ -1,7 +1,7 @@
-import { fetchTrendingData } from "@/lib/coingecko";
 import { useQuery } from "@tanstack/react-query";
 import { ScrollView, Text, View } from "react-native";
 import DAppItem from "./DAppItem";
+import { fetchTrendingData } from "@/lib/fetcher/client";
 
 export default function FeaturedDApps() {
   const { data } = useQuery({

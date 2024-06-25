@@ -1,4 +1,4 @@
-import { fetchGlobalMarketData } from "@/lib/coingecko"
+import { fetchGlobalMarketData } from "@/lib/fetcher/client"
 import { formatLargeNumber } from "@/lib/utils"
 import { useQuery } from "@tanstack/react-query"
 import { FormattedNumber } from "react-intl"
@@ -29,7 +29,7 @@ export default function GlobalMarketCap({ }: Props) {
           'text-sm font-midnight-sans-st-36',
           percent > 0 ? 'text-green' : 'text-red'
         )}>
-        (<FormattedNumber value={percent ?? 0} style="percent" minimumFractionDigits={0} maximumFractionDigits={2} />)
+        (<FormattedNumber value={(percent / 100) ?? 0} style="percent" minimumFractionDigits={0} maximumFractionDigits={2} />)
       </Text>
     </View>
   )

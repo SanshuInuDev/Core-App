@@ -49,7 +49,7 @@ export interface NewsArticle {
   metadata: Metadata;
 }
 
-export interface LatestNewsResponse {
+export interface NewsResponse {
   count: number;
   next: string | null;
   previous: string | null;

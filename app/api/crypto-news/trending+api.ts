@@ -1,8 +1,8 @@
-import { fetchLatestNews } from "@/lib/cryptopanic";
+import { fetchTrendingNews } from "@/lib/cryptopanic";
 
-export async function GET(request: Request) {
+export async function GET() {
   try {
-    const news = await fetchLatestNews()
+    const news = await fetchTrendingNews()
     return Response.json(news);
   } catch (error) {
     console.error(error)

@@ -1,4 +1,4 @@
-import { CryptopanicFetchOptions, LatestNewsResponse } from "./types";
+import { CryptopanicFetchOptions, NewsResponse } from "./types";
 
 const cryptopanicFetch = async <T>({ endpoint, params }: CryptopanicFetchOptions): Promise<T> => {
   const baseUrl = 'https://cryptopanic.com/api/v1';
@@ -28,18 +28,33 @@ const cryptopanicFetch = async <T>({ endpoint, params }: CryptopanicFetchOptions
 
 
 
-export const fetchLatestNews = async (): Promise<LatestNewsResponse> => {
+export const fetchLatestNews = async (): Promise<NewsResponse> => {
   try {
-    const news = await cryptopanicFetch<LatestNewsResponse>({
+    const news = await cryptopanicFetch<NewsResponse>({
       endpoint: 'posts/',
       params: {
-        filter: 'rising',
         kind: 'news'
       }
     });
     return news;
   } catch (error) {
     console.error('Error fetching latest news:', error);
+    throw error;
+  }
+};
+
+export const fetchTrendingNews = async (): Promise<NewsResponse> => {
+  try {
+    const trendingNews = await cryptopanicFetch<NewsResponse>({
+      endpoint: 'posts/',
+      params: {
+        filter: 'rising', // Assuming 'rising' filter returns trending news
+        kind: 'news'
+      },
+    });
+    return trendingNews;
+  } catch (error) {
+    console.error('Error fetching trending news:', error);
     throw error;
   }
 };

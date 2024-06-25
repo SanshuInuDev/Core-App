@@ -9,7 +9,6 @@ import {
   SheetProps
 } from 'react-native-actions-sheet';
 import SheetCloseButton from '../SheetCloseButton';
-import LatestCryptoItem from './LatestCryptoItem';
 import TrendingSocial from './TrendingSocial';
 
 export default function NewsSheet(props: SheetProps) {

@@ -1,18 +1,16 @@
-import { CoinMarket } from '@/lib/types';
 import RadixIcon from '@/components/RadixIcon';
-import { useCallback, useEffect, useState } from 'react';
+import { fetchCoinsByMarketCap } from '@/lib/fetcher/client';
+import { useQuery } from "@tanstack/react-query";
 import { Text, TouchableOpacity, View } from 'react-native';
 import { SheetManager } from 'react-native-actions-sheet';
 import DiscoverItem from './DiscoverItem';
-import { useQuery } from "@tanstack/react-query";
-import { fetchCoinsByMarketCap } from '@/lib/coingecko';
 
 export default function Discover() {
   const { data } = useQuery({
     queryKey: ['marketCap'],
     queryFn: fetchCoinsByMarketCap
   })
-  
+
   return <View>
     <View className='flex-row items-center'>
       <Text className='flex-1 text-white font-midnight-sans-st-36 text-5'>Discover</Text>
