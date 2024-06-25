@@ -12,6 +12,7 @@ import { StyleSheet } from 'react-native';
 import { SheetProvider } from 'react-native-actions-sheet';
 import 'react-native-reanimated';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import './global.css';
 
 
 // export {
