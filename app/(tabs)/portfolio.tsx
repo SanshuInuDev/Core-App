@@ -1,9 +1,9 @@
-import { Image, StyleSheet, View } from 'react-native';
+import { Image, View } from 'react-native';
 
 export default function Portfolio() {
   return (
-    <View style={styles.container}>
-      <View style={styles.header}>
+    <View>
+      <View>
         <Image
           source={require('@/assets/images/Logo.png')}
         />
@@ -14,16 +14,3 @@ export default function Portfolio() {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingHorizontal: 24,
-    paddingTop: 48,
-    backgroundColor: '#0D0512'
-  },
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between'
-  }
-});

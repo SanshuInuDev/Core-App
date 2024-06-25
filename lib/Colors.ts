@@ -5,4 +5,5 @@ export default {
   tint: '#AF06FF',
   white: '#FFFFFF',
   gray: '#6d6870',
+  red: '#f24822'
 };
