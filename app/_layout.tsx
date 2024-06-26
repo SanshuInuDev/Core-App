@@ -1,6 +1,5 @@
 import { useColorScheme } from '@/components/useColorScheme';
 import '@/lib/sheets';
-import { IntlProvider } from 'react-intl';
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useFonts } from 'expo-font';
@@ -8,7 +7,7 @@ import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { NativeWindStyleSheet } from "nativewind";
 import React, { useEffect } from 'react';
-import { StyleSheet } from 'react-native';
+import { IntlProvider } from 'react-intl';
 import { SheetProvider } from 'react-native-actions-sheet';
 import 'react-native-reanimated';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -74,7 +73,7 @@ function RootLayoutNav() {
 
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <SafeAreaView style={styles.container}>
+      <SafeAreaView className='flex-1'>
         <SheetProvider>
           <Stack>
             <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
@@ -85,9 +84,3 @@ function RootLayoutNav() {
     </ThemeProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1
-  }
-});

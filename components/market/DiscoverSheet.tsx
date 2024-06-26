@@ -8,7 +8,7 @@ import {
   ScrollView,
   SheetProps
 } from 'react-native-actions-sheet';
-import SheetCloseButton from '../SheetCloseButton';
+import SheetCloseButton from '../common/SheetCloseButton';
 import { useQuery } from '@tanstack/react-query';
 import { MarketCoin } from '@/lib/coingecko/types';
 import DiscoverItem from './DiscoverItem';

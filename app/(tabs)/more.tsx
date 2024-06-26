@@ -1,42 +1,67 @@
-<<<<<<< HEAD
-import { Image, View } from 'react-native';
+import RadixIcon from '@/components/RadixIcon';
+import Button from '@/components/common/Button';
+import SanshuLogo from '@/components/common/SanshuLogo';
+import SearchButton from '@/components/common/SearchButton';
+import MainButtonList from '@/components/more/MainButtonList';
+import { Text, View, ScrollView } from 'react-native';
+import { SheetManager } from 'react-native-actions-sheet';
 
 export default function More() {
   return (
-    <View >
-      <View className='mt-4 ml-4'>
-=======
-import { Image, StyleSheet, View } from 'react-native';
-
-export default function More() {
-  return (
-    <View style={styles.container}>
-      <View style={styles.header}>
->>>>>>> ed3159b7d106a8718cc5dc9080f6a2746ed04823
-        <Image
-          source={require('@/assets/images/Logo.png')}
+    <View className='flex-1 px-6 bg-base-100'>
+      <ScrollView className='flex-1 h-1 py-12'>
+        <View className='flex-row items-center justify-between pb-6'>
+          <SanshuLogo />
+          <SearchButton id='market-search-sheet' />
+        </View>
+        <View>
+          <Text className='text-white font-midnight-sans-st-48 text-7.5'>More</Text>
+        </View>
+        <View className='h-10' />
+        <MainButtonList
+          title='Account'
+          source={[
+            {
+              icon: <RadixIcon name='person' color='white' />,
+              title: 'Profile'
+            },
+            {
+              icon: <RadixIcon name='lock-closed' color='white' />,
+              title: 'Security'
+            },
+            {
+              icon: <RadixIcon name='bell' color='white' />,
+              title: 'Notification Settings'
+            }
+          ]}
         />
-        <Image
-          source={require('@/assets/images/magnifying-glass.png')}
+        <View className='h-10' />
+        <MainButtonList
+          title='General'
+          source={[
+            {
+              icon: <RadixIcon name='globe' color='white' />,
+              title: 'Languate',
+              subTitle: 'English'
+            },
+            {
+              icon: <RadixIcon name='mask-off' color='white' />,
+              title: 'Currency',
+              subTitle: 'USD'
+            }
+          ]}
         />
+        <View className='h-16' />
+      </ScrollView>
+      <View className='flex-row pb-16'>
+        <Button
+          onPress={() => {
+            SheetManager.show('login-sheet')
+          }}
+        >Log in</Button>
+        <View className='w-4' />
+        <Button theme='dark'>Sign up</Button>
       </View>
     </View>
   );
-<<<<<<< HEAD
 }
-=======
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingHorizontal: 24,
-    paddingTop: 48,
-    backgroundColor: '#0D0512'
-  },
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between'
-  }
-});
->>>>>>> ed3159b7d106a8718cc5dc9080f6a2746ed04823
