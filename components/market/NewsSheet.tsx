@@ -8,7 +8,7 @@ import {
   ScrollView,
   SheetProps
 } from 'react-native-actions-sheet';
-import SheetCloseButton from '../SheetCloseButton';
+import SheetCloseButton from '../common/SheetCloseButton';
 import TrendingSocial from './TrendingSocial';
 
 export default function NewsSheet(props: SheetProps) {

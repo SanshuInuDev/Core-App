@@ -10,7 +10,7 @@ import { ScrollView, Text, View } from 'react-native';
 
 export default function TabOneScreen() {
   return (
-    <ScrollView className='px-6 py-12 bg-base100'>
+    <ScrollView className='px-6 py-12 bg-base-100'>
       <View className='flex-row items-center justify-between'>
         <SanshuLogo />
         <SearchButton id='market-search-sheet' />

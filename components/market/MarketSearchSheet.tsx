@@ -2,7 +2,7 @@ import { createRef, useEffect, useRef } from "react";
 import { Button, ScrollView, Text, TextInput, View } from "react-native";
 import { SheetProps } from "react-native-actions-sheet";
 import AppSheet from "../AppSheet";
-import SheetCloseButton from "../SheetCloseButton";
+import SheetCloseButton from "../common/SheetCloseButton";
 
 export default function MarketSearchSheet(props: SheetProps) {
   return (
