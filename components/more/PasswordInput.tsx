@@ -11,7 +11,7 @@ export default function PasswordInput(
       <TextInput
         secureTextEntry={secure}
         placeholder="Enter your password"
-        className="flex-1 h-full pl-4 py-2 text-white rounded-l-full placeholder:text-gray !outline-none font-midnight-sans-st-36"
+        className="flex-1 h-full pl-4 py-2 text-white rounded-l-full !outline-none font-midnight-sans-st-36"
         {...rest} />
       <View className="p-1.5">
         <TouchableOpacity

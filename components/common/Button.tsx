@@ -5,7 +5,7 @@ type Theme = 'dark' | 'light' | 'danger' | 'outline'
 
 interface Props extends TouchableOpacityProps {
   theme?: Theme
-  children: string | React.ReactNode
+  children: string
 }
 
 type ThemeStyles = {

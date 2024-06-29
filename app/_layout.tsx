@@ -11,7 +11,10 @@ import { IntlProvider } from 'react-intl';
 import { SheetProvider } from 'react-native-actions-sheet';
 import 'react-native-reanimated';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useAuth0, Auth0Provider } from 'react-native-auth0'
 import './global.css';
+import 'expo-dev-client';
+
 
 
 // export {
@@ -73,14 +76,19 @@ function RootLayoutNav() {
 
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <SafeAreaView className='flex-1'>
-        <SheetProvider>
-          <Stack>
-            <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-            <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
-          </Stack>
-        </SheetProvider>
-      </SafeAreaView>
+      <Auth0Provider
+        domain={process.env.EXPO_PUBLIC_AUTH0_DOMAIN ?? ''}
+        clientId={process.env.EXPO_PUBLIC_AUTH0_CLIENT_ID ?? ''}
+      >
+        <SafeAreaView className='flex-1'>
+          <SheetProvider>
+            <Stack>
+              <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+              <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
+            </Stack>
+          </SheetProvider>
+        </SafeAreaView>
+      </Auth0Provider>
     </ThemeProvider>
   );
 }

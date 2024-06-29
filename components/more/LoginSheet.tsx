@@ -1,5 +1,5 @@
 import AppSheet from '@/components/AppSheet';
-import React from 'react';
+import React, { useCallback } from 'react';
 import {
   Image,
   Text,
@@ -13,8 +13,51 @@ import Input from '../common/Input';
 import SheetCloseButton from '../common/SheetCloseButton';
 import PasswordInput from './PasswordInput';
 import Button from '../common/Button';
+import Auth0, { useAuth0, Auth0Provider } from 'react-native-auth0';
+
+const auth0 = new Auth0({
+  domain: process.env.EXPO_PUBLIC_AUTH0_DOMAIN ?? 'YOUR_AUTH0_DOMAIN',
+  clientId: process.env.EXPO_PUBLIC_AUTH0_CLIENT_ID ?? 'YOUR_CLIENT_ID',
+});
+
 
 export default function LoginSheet(props: SheetProps) {
+  const { authorize, sendEmailCode } = useAuth0();
+
+  const onLogin = useCallback(async () => {
+    try {
+      // await auth0.auth.createUser({
+      //   connection: 'Username-Password-Authentication', // Use 'sms' for SMS-based OTP or 'email' for email-based OTP
+      //   email: 'truepartner312@gmail.com', // Using phone number as email for demo
+      //   // password: Math.random().toString(36).slice(-8), // Generate a random password
+      //   password: 'asdFG@145220', // Generate a random password
+      //   email_verified: false
+      // });
+      // const response = await auth0.auth.passwordRealm({
+      //   username: 'truepartner312@gmail.com',
+      //   password: 'asdFG@145220',
+      //   connection: 'email',
+      //   realm: 'Username-Password-Authentication',
+      //   scope: 'openid profile email'
+      // })
+      // if (response) {
+      //   console.log('Logged in successfully', response);
+      //   const userInfo = await auth0.auth.userInfo({ token: response.accessToken });
+      //   console.log('user info', userInfo);
+      // }
+
+
+      await auth0.auth.passwordlessWithEmail({
+        email: 'truepartner312@gmail.com',
+        send: 'code',
+      });
+      console.log('OTP sent to email:', 'truepartner312@gmail.com');
+  
+    } catch (error) {
+      console.error(error);
+    }
+  }, [])
+
   return (
     <AppSheet provider={props}>
       <View className='flex-row items-center pb-6'>
@@ -44,7 +87,10 @@ export default function LoginSheet(props: SheetProps) {
         <View className='mt-6'>
           <PasswordInput />
         </View>
-        <Button className='mt-6'>
+        <Button
+          className='mt-6'
+          onPress={onLogin}
+        >
           Login
         </Button>
         <View className='relative flex items-center mt-6 border-b border-gray'>
@@ -52,32 +98,32 @@ export default function LoginSheet(props: SheetProps) {
             OR
           </Text>
         </View>
-        <Button theme='outline' className='mt-6'>
-          <Image
+        <Button className='mt-6'>
+          {/* <Image
             className='mr-1'
             source={require('@/assets/images/google.svg')}
-          />
+          /> */}
           Continue with Google
         </Button>
-        <Button theme='outline' className='mt-6'>
-          <Image
+        <Button className='mt-6'>
+          {/* <Image
             className='mr-1'
             source={require('@/assets/images/apple.svg')}
-          />
+          /> */}
           Continue with Apple
         </Button>
-        <Button theme='outline' className='mt-6'>
-          <Image
+        <Button className='mt-6'>
+          {/* <Image
             className='mr-1'
             source={require('@/assets/images/Exchanges.svg')}
-          />
+          /> */}
           Continue with exchange
         </Button>
-        <Button theme='outline' className='mt-6'>
-          <Image
+        <Button className='mt-6'>
+          {/* <Image
             className='mr-1'
             source={require('@/assets/images/Wallets.svg')}
-          />
+          /> */}
           Continue with Wallet
         </Button>
       </View>
