@@ -1,5 +1,10 @@
-import { useColorScheme } from '@/components/useColorScheme';
+import "@ethersproject/shims";
+import "@expo/metro-runtime";
+import "react-native-get-random-values";
+import "react-native-reanimated";
+import "../globals"
 import '@/lib/sheets';
+import { useColorScheme } from '@/components/useColorScheme';
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useFonts } from 'expo-font';
@@ -9,13 +14,11 @@ import { NativeWindStyleSheet } from "nativewind";
 import React, { useEffect } from 'react';
 import { IntlProvider } from 'react-intl';
 import { SheetProvider } from 'react-native-actions-sheet';
-import 'react-native-reanimated';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useAuth0, Auth0Provider } from 'react-native-auth0'
+
 import './global.css';
 import 'expo-dev-client';
-
-
 
 // export {
 //   // Catch any errors thrown by the Layout component.

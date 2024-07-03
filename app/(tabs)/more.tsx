@@ -58,9 +58,17 @@ export default function More() {
           onPress={() => {
             SheetManager.show('login-sheet')
           }}
-        >Log in</Button>
+        >
+          <Text className='text-sm text-center text-base-100 font-midnight-sans-st-36'>
+            Log in
+          </Text>
+        </Button>
         <View className='w-4' />
-        <Button theme='dark'>Sign up</Button>
+        <Button theme='dark'>
+          <Text className='text-sm text-center text-white font-midnight-sans-st-36'>
+            Sign up
+          </Text>
+        </Button>
       </View>
     </View>
   );
