@@ -3,10 +3,12 @@ import Button from '@/components/common/Button';
 import SanshuLogo from '@/components/common/SanshuLogo';
 import SearchButton from '@/components/common/SearchButton';
 import MainButtonList from '@/components/more/MainButtonList';
+import useAppProvider from '@/hooks/useAppProvider';
 import { Text, View, ScrollView } from 'react-native';
 import { SheetManager } from 'react-native-actions-sheet';
 
 export default function More() {
+  const { isAuthenticated, setAddress } = useAppProvider()
   return (
     <View className='flex-1 px-6 bg-base-100'>
       <ScrollView className='flex-1 h-1 py-12'>
@@ -53,23 +55,51 @@ export default function More() {
         />
         <View className='h-16' />
       </ScrollView>
-      <View className='flex-row pb-16'>
-        <Button
-          onPress={() => {
-            SheetManager.show('login-sheet')
-          }}
-        >
-          <Text className='text-sm text-center text-base-100 font-midnight-sans-st-36'>
-            Log in
-          </Text>
-        </Button>
-        <View className='w-4' />
-        <Button theme='dark'>
-          <Text className='text-sm text-center text-white font-midnight-sans-st-36'>
-            Sign up
-          </Text>
-        </Button>
-      </View>
+      {
+        isAuthenticated ?
+          <View className='flex-row pb-16'>
+            <Button
+              onPress={() => {
+                setAddress(undefined)
+              }}
+            >
+              <Text className='text-sm text-center text-base-100 font-midnight-sans-st-36'>
+                Log out
+              </Text>
+            </Button>
+          </View> :
+          <View className='flex-row pb-16'>
+            <Button
+              onPress={() => {
+                SheetManager.show('login-sheet', {
+                  payload: {
+                    mode: 'Login'
+                  }
+                })
+              }}
+            >
+              <Text className='text-sm text-center text-base-100 font-midnight-sans-st-36'>
+                Log in
+              </Text>
+            </Button>
+            <View className='w-4' />
+            <Button
+              theme='dark'
+              onPress={() => {
+                SheetManager.show('login-sheet', {
+                  payload: {
+                    mode: 'Signup'
+                  }
+                })
+              }}
+            >
+              <Text className='text-sm text-center text-white font-midnight-sans-st-36'>
+                Sign up
+              </Text>
+            </Button>
+          </View>
+      }
+
     </View>
   );
 }

@@ -1,3 +1,4 @@
+import '@walletconnect/react-native-compat';
 import "@ethersproject/shims";
 import "@expo/metro-runtime";
 import "react-native-get-random-values";
@@ -15,10 +16,11 @@ import React, { useEffect } from 'react';
 import { IntlProvider } from 'react-intl';
 import { SheetProvider } from 'react-native-actions-sheet';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { useAuth0, Auth0Provider } from 'react-native-auth0'
+import { Auth0Provider } from 'react-native-auth0'
 
 import './global.css';
 import 'expo-dev-client';
+import AppProvider from '@/components/AppProvider';
 
 // export {
 //   // Catch any errors thrown by the Layout component.
@@ -66,11 +68,13 @@ export default function RootLayout() {
   }
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <IntlProvider locale="en">
-        <RootLayoutNav />
-      </IntlProvider>
-    </QueryClientProvider>
+    <AppProvider>
+      <QueryClientProvider client={queryClient}>
+        <IntlProvider locale="en">
+          <RootLayoutNav />
+        </IntlProvider>
+      </QueryClientProvider>
+    </AppProvider>
   )
 }
 

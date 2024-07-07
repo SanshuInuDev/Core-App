@@ -1,9 +1,9 @@
 import React from "react";
-import { Image, View } from 'react-native';
-
+import { Image, Text, View } from 'react-native';
+import useAppProvider from "@/hooks/useAppProvider";
 
 export default function Watching() {
-
+  const {address} = useAppProvider()
   return (
     <View >
       <View >
@@ -14,6 +14,7 @@ export default function Watching() {
           source={require('@/assets/images/magnifying-glass.png')}
         />
       </View>
+      <Text className="text-lg text-black">{address}</Text>
       {/* <TouchableOpacity
         className="mt-4"
         onPress={() => {
