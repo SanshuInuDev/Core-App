@@ -67,10 +67,11 @@ export default function VerifyPage({ }: Props) {
               Enter your verification code
             </Text>
           </View>
-          <View className='flex-row pb-16'>
+          <View className='flex-row pb-16 mt-24'>
             <Button
               onPress={() => {
               }}
+              className='flex-1'
             >
               <Text className='text-sm text-center text-base-100 font-midnight-sans-st-36'>
                 Resend Email

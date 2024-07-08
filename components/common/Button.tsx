@@ -39,7 +39,7 @@ export default function Button(
     <TouchableOpacity
       {...reset}
       className={twMerge(
-        'flex items-center justify-center rounded-full px-4 py-3 flex-1 flex-row',
+        'flex items-center justify-center rounded-full px-4 py-3 flex-row',
         themeClassName[theme].bg
       )}
     >

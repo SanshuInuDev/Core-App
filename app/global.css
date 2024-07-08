@@ -4,5 +4,6 @@
 
 * {
   font-family: 'Midnight';
+  box-sizing: border-box;
   outline: none;
 }

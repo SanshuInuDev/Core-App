@@ -1,11 +1,11 @@
 import { createContext, useContext, useState } from "react"
 
 export const AppContext = createContext<{
-  address: string | undefined,
-  setAddress: (address: string | undefined) => void,
+  address: string | null,
+  setAddress: (address: string | null) => void,
   isAuthenticated: boolean
 }>({
-  address: undefined,
+  address: null,
   setAddress: () => { },
   isAuthenticated: false
 })
@@ -17,7 +17,7 @@ export interface AppProviderProps {
 export default function AppProvider(
   { children }: AppProviderProps
 ) {
-  const [address, setAddress] = useState<string | undefined>()
+  const [address, setAddress] = useState<string | null>(null)
   return (
     <AppContext.Provider
       value={{

@@ -37,6 +37,7 @@ export default function VerifyCompletePage({ }: Props) {
           onPress={() => {
             SheetManager.hide('login-sheet')
           }}
+          className='flex-1'
         >
           <Text className='text-sm text-center text-base-100 font-midnight-sans-st-36'>
             Continue to dashboard

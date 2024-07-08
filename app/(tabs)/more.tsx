@@ -1,14 +1,18 @@
 import RadixIcon from '@/components/RadixIcon';
+import { useWeb3AuthProvider } from '@/components/Web3AuthProvider';
 import Button from '@/components/common/Button';
 import SanshuLogo from '@/components/common/SanshuLogo';
 import SearchButton from '@/components/common/SearchButton';
 import MainButtonList from '@/components/more/MainButtonList';
 import useAppProvider from '@/hooks/useAppProvider';
+import useWalletAuth from '@/hooks/useWalletAuth';
 import { Text, View, ScrollView } from 'react-native';
 import { SheetManager } from 'react-native-actions-sheet';
 
 export default function More() {
-  const { isAuthenticated, setAddress } = useAppProvider()
+  const { isAuthenticated } = useAppProvider()
+  const { disconnect } = useWalletAuth()
+  const { logout } = useWeb3AuthProvider()
   return (
     <View className='flex-1 px-6 bg-base-100'>
       <ScrollView className='flex-1 h-1 py-12'>
@@ -60,8 +64,10 @@ export default function More() {
           <View className='flex-row pb-16'>
             <Button
               onPress={() => {
-                setAddress(undefined)
+                disconnect()
+                logout()
               }}
+              className='flex-1'
             >
               <Text className='text-sm text-center text-base-100 font-midnight-sans-st-36'>
                 Log out
@@ -77,6 +83,7 @@ export default function More() {
                   }
                 })
               }}
+              className='flex-full'
             >
               <Text className='text-sm text-center text-base-100 font-midnight-sans-st-36'>
                 Log in
@@ -92,6 +99,7 @@ export default function More() {
                   }
                 })
               }}
+              className='flex-full'
             >
               <Text className='text-sm text-center text-white font-midnight-sans-st-36'>
                 Sign up

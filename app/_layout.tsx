@@ -21,6 +21,7 @@ import { Auth0Provider } from 'react-native-auth0'
 import './global.css';
 import 'expo-dev-client';
 import AppProvider from '@/components/AppProvider';
+import Web3AuthProvider from '@/components/Web3AuthProvider';
 
 // export {
 //   // Catch any errors thrown by the Layout component.
@@ -69,11 +70,13 @@ export default function RootLayout() {
 
   return (
     <AppProvider>
-      <QueryClientProvider client={queryClient}>
-        <IntlProvider locale="en">
-          <RootLayoutNav />
-        </IntlProvider>
-      </QueryClientProvider>
+      <Web3AuthProvider>
+        <QueryClientProvider client={queryClient}>
+          <IntlProvider locale="en">
+            <RootLayoutNav />
+          </IntlProvider>
+        </QueryClientProvider>
+      </Web3AuthProvider>
     </AppProvider>
   )
 }
