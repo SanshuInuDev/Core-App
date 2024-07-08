@@ -1,11 +1,11 @@
-import { Text, TouchableOpacity, TouchableOpacityProps } from "react-native";
+import { TouchableOpacity, TouchableOpacityProps } from "react-native";
 import { twMerge } from 'tailwind-merge';
 
 type Theme = 'dark' | 'light' | 'danger' | 'outline'
 
 interface Props extends TouchableOpacityProps {
   theme?: Theme
-  children: string | React.ReactNode
+  children: React.ReactNode
 }
 
 type ThemeStyles = {
@@ -39,19 +39,11 @@ export default function Button(
     <TouchableOpacity
       {...reset}
       className={twMerge(
-        'flex items-center justify-center rounded-full px-4 py-3 flex-1',
+        'flex items-center justify-center rounded-full px-4 py-3 flex-row',
         themeClassName[theme].bg
       )}
-    >{
-        <Text
-          className={twMerge(
-            'font-midnight-sans-st-36 text-4 leading-6',
-            themeClassName[theme].text
-          )}
-        >
-          {children}
-        </Text>
-      }
+    >
+      {children}
     </TouchableOpacity>
   );
 }

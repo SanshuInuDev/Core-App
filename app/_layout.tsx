@@ -1,5 +1,11 @@
-import { useColorScheme } from '@/components/useColorScheme';
+import '@walletconnect/react-native-compat';
+import "@ethersproject/shims";
+import "@expo/metro-runtime";
+import "react-native-get-random-values";
+import "react-native-reanimated";
+import "../globals"
 import '@/lib/sheets';
+import { useColorScheme } from '@/components/useColorScheme';
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useFonts } from 'expo-font';
@@ -9,10 +15,13 @@ import { NativeWindStyleSheet } from "nativewind";
 import React, { useEffect } from 'react';
 import { IntlProvider } from 'react-intl';
 import { SheetProvider } from 'react-native-actions-sheet';
-import 'react-native-reanimated';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import './global.css';
+import { Auth0Provider } from 'react-native-auth0'
 
+import './global.css';
+import 'expo-dev-client';
+import AppProvider from '@/components/AppProvider';
+import Web3AuthProvider from '@/components/Web3AuthProvider';
 
 // export {
 //   // Catch any errors thrown by the Layout component.
@@ -60,11 +69,15 @@ export default function RootLayout() {
   }
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <IntlProvider locale="en">
-        <RootLayoutNav />
-      </IntlProvider>
-    </QueryClientProvider>
+    <AppProvider>
+      <Web3AuthProvider>
+        <QueryClientProvider client={queryClient}>
+          <IntlProvider locale="en">
+            <RootLayoutNav />
+          </IntlProvider>
+        </QueryClientProvider>
+      </Web3AuthProvider>
+    </AppProvider>
   )
 }
 
@@ -73,14 +86,19 @@ function RootLayoutNav() {
 
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <SafeAreaView className='flex-1'>
-        <SheetProvider>
-          <Stack>
-            <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-            <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
-          </Stack>
-        </SheetProvider>
-      </SafeAreaView>
+      <Auth0Provider
+        domain={process.env.EXPO_PUBLIC_AUTH0_DOMAIN ?? ''}
+        clientId={process.env.EXPO_PUBLIC_AUTH0_CLIENT_ID ?? ''}
+      >
+        <SafeAreaView className='flex-1'>
+          <SheetProvider>
+            <Stack>
+              <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+              <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
+            </Stack>
+          </SheetProvider>
+        </SafeAreaView>
+      </Auth0Provider>
     </ThemeProvider>
   );
 }
