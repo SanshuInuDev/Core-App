@@ -7,11 +7,28 @@ import Colors from '@/lib/Colors';
 import { useState } from 'react';
 import Button from '../common/Button';
 import { useLoginProvder } from './LoginProvider';
+import supabase from '@/lib/supabase';
 
 type Props = {}
 
 export default function VerifyPage({ }: Props) {
-  const { setPage } = useLoginProvder()
+  const { setPage, reEmail } = useLoginProvder()
+
+  const onCheckOTP = async (otp: string) => {
+    try {
+      const {
+        data: { session },
+        error,
+      } = await supabase.auth.verifyOtp({
+        email: reEmail,
+        token: otp,
+        type: 'signup',
+      })
+      setPage('VerifyCompletePage')
+    } catch (error) {
+      console.error(error)
+    }
+  }
   return (
     <View className='h-screen'>
       <View className='flex-row items-center justify-center'>
@@ -36,10 +53,7 @@ export default function VerifyPage({ }: Props) {
             <View className='mt-4'>
               <OtpInput
                 focusColor={Colors.white}
-                onFilled={(otp) => {
-                  console.log(otp)
-                  setPage('VerifyCompletePage')
-                }}
+                onFilled={onCheckOTP}
                 theme={{
                   focusedPinCodeContainerStyle: {
                     borderColor: Colors.white,
