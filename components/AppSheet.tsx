@@ -2,11 +2,12 @@ import Colors from '@/lib/Colors';
 import React, { useRef } from 'react';
 import { View } from 'react-native';
 import ActionSheet, {
+  ActionSheetProps,
   ActionSheetRef,
   SheetProps,
 } from 'react-native-actions-sheet';
 
-interface Props {
+interface Props extends ActionSheetProps {
   provider: SheetProps
   children: React.ReactNode
 }

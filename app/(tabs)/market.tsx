@@ -8,7 +8,7 @@ import TopMovers from '@/components/market/TopMovers';
 import TrendingSocial from '@/components/market/TrendingSocial';
 import { ScrollView, Text, View } from 'react-native';
 
-export default function TabOneScreen() {
+export default function Market() {
   return (
     <ScrollView className='px-6 py-12 bg-base-100'>
       <View className='flex-row items-center justify-between'>
