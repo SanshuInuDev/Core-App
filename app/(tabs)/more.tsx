@@ -6,7 +6,7 @@ import SearchButton from '@/components/common/SearchButton';
 import MainButtonList from '@/components/more/MainButtonList';
 import useAppProvider from '@/hooks/useAppProvider';
 import useWalletAuth from '@/hooks/useWalletAuth';
-import { Text, View, ScrollView } from 'react-native';
+import { ScrollView, Text, View } from 'react-native';
 import { SheetManager } from 'react-native-actions-sheet';
 
 export default function More() {

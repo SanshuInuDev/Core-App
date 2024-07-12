@@ -1,25 +1,19 @@
 import AppSheet from '@/components/AppSheet';
-import React from 'react';
-import {
-  View, Text,
-  TextInput
-} from 'react-native';
-import {
-  ScrollView,
-  SheetProps
-} from 'react-native-actions-sheet';
-import SheetCloseButton from '../common/SheetCloseButton';
-import { useQuery } from '@tanstack/react-query';
+import SheetCloseButton from '@/components/common/SheetCloseButton';
 import { MarketCoin } from '@/lib/coingecko/types';
+import { useQuery } from '@tanstack/react-query';
+import React from 'react';
+import { Text, TextInput, View } from 'react-native';
+import { ScrollView } from 'react-native-actions-sheet';
 import DiscoverItem from './DiscoverItem';
 
-export default function DiscoverSheet(props: SheetProps) {
+export default function DiscoverSheet() {
   const { data } = useQuery<MarketCoin[]>({
     queryKey: ['marketCap']
   })
   return (
-    <AppSheet provider={props}>
-      <View className='flex-row items-center pb-4'>
+    <AppSheet>
+      <View className='flex-row items-center pt-6 pb-4'>
         <Text className='flex-1 text-white text-5 font-midnight-sans-st-36'>Discover</Text>
         <SheetCloseButton id='discover-sheet' />
       </View>

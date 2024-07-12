@@ -1,7 +1,6 @@
 import { NewsArticle } from "@/lib/cryptopanic/types";
 import { Image, Text, View } from "react-native";
 
-
 interface Props {
   data: NewsArticle
 }

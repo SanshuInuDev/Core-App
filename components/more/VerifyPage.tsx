@@ -1,13 +1,12 @@
+import BackButton from '@/components/common/BackButton';
+import Button from '@/components/common/Button';
+import SheetCloseButton from '@/components/common/SheetCloseButton';
+import Colors from '@/lib/Colors';
+import supabase from '@/lib/supabase';
 import { ScrollView, Text, View } from 'react-native';
 import { OtpInput } from "react-native-otp-entry";
 import RadixIcon from '../RadixIcon';
-import BackButton from '../common/BackButton';
-import SheetCloseButton from '../common/SheetCloseButton';
-import Colors from '@/lib/Colors';
-import { useState } from 'react';
-import Button from '../common/Button';
 import { useLoginProvder } from './LoginProvider';
-import supabase from '@/lib/supabase';
 
 type Props = {}
 
@@ -87,9 +86,7 @@ export default function VerifyPage({ }: Props) {
               }}
               className='flex-1'
             >
-              <Text className='text-sm text-center text-base-100 font-midnight-sans-st-36'>
-                Resend Email
-              </Text>
+              Resend Email
             </Button>
           </View>
         </View>

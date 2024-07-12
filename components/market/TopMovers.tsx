@@ -1,4 +1,3 @@
-
 import { fetchCoinsByMarketCap } from '@/lib/fetcher/client';
 import { useQuery } from '@tanstack/react-query';
 import { ScrollView, Text, View } from 'react-native';

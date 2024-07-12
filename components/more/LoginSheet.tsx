@@ -1,21 +1,17 @@
 import AppSheet from '@/components/AppSheet';
-import React, { useState } from 'react';
-import { SheetProps } from 'react-native-actions-sheet';
-import MainPage from './MainPage';
-import VerifyPage from './VerifyPage';
-import VerifyCompletePage from './VerifyCompletePage';
+import React from 'react';
+import { View } from 'react-native';
 import LoginProvider, { useLoginProvder } from './LoginProvider';
+import MainPage from './MainPage';
+import VerifyCompletePage from './VerifyCompletePage';
+import VerifyPage from './VerifyPage';
 
 
-export default function LoginSheet(props: SheetProps) {
-
+export default function LoginSheet() {
   return (
-    <AppSheet provider={props}>
+    <AppSheet>
       <LoginProvider>
         <LoginPage />
-        {/* <VerifyPage /> */}
-
-        {/* <MainPage /> */}
       </LoginProvider>
     </AppSheet>
   );
@@ -30,6 +26,10 @@ const Pages = {
 function LoginPage() {
   const { page } = useLoginProvder()
   return (
-    Pages[page]
+    <View className='pt-6'>
+      {
+        Pages[page]
+      }
+    </View>
   )
 }

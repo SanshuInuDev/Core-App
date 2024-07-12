@@ -1,10 +1,10 @@
-import { Alert, Text, View } from "react-native";
+import supabase from "@/lib/supabase";
+import { useState } from "react";
+import { Alert, View } from "react-native";
 import Button from "../common/Button";
 import Input from "../common/Input";
-import PasswordInput from "./PasswordInput";
 import { useLoginProvder } from "./LoginProvider";
-import { useState } from "react";
-import supabase from "@/lib/supabase";
+import PasswordInput from "./PasswordInput";
 
 export default function EmailSignup() {
   const { reEmail, setReEmail } = useLoginProvder()
@@ -42,9 +42,7 @@ export default function EmailSignup() {
         className='mt-6'
         onPress={signUpWithEmail}
       >
-        <Text className='leading-6 font-midnight-sans-st-36 text-4'>
-          Create an account
-        </Text>
+        Create an account
       </Button>
     </View>
   )

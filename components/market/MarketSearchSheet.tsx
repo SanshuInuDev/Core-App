@@ -1,13 +1,11 @@
-import { createRef, useEffect, useRef } from "react";
-import { Button, ScrollView, Text, TextInput, View } from "react-native";
-import { SheetProps } from "react-native-actions-sheet";
+import { ScrollView, Text, TextInput, View } from "react-native";
 import AppSheet from "../AppSheet";
 import SheetCloseButton from "../common/SheetCloseButton";
 
-export default function MarketSearchSheet(props: SheetProps) {
+export default function MarketSearchSheet() {
   return (
-    <AppSheet provider={props}>
-      <View className='flex-row items-center pb-4'>
+    <AppSheet>
+      <View className='flex-row items-center pt-6 pb-4'>
         <Text className='flex-1 text-white text-5 font-midnight-sans-st-36'>Search</Text>
         <SheetCloseButton id='market-search-sheet' />
       </View>
