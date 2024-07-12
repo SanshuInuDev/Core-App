@@ -12,7 +12,7 @@ type Props = {}
 export default function VerifyCompletePage({ }: Props) {
   const { setPage } = useLoginProvder()
   return (
-    <View className='h-screen pb-[40%]'>
+    <View className='h-full'>
       <View className='flex-row items-center justify-center'>
         <BackButton
           onPress={() => {
@@ -32,16 +32,14 @@ export default function VerifyCompletePage({ }: Props) {
           You have successfully signed up to Sanshu!
         </Text>
       </View>
-      <View className='flex-row'>
-        <Button
-          onPress={() => {
-            SheetManager.hide('login-sheet')
-          }}
-          className='flex-1'
-        >
-          Continue to dashboard
-        </Button>
-      </View>
+      <Button
+        onPress={() => {
+          SheetManager.hide('login-sheet')
+        }}
+        className='w-full mb-6'
+      >
+        Continue to dashboard
+      </Button>
     </View>
   )
 }

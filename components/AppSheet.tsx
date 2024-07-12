@@ -22,15 +22,18 @@ export default function AppSheet({
 
 const styles = StyleSheet.create({
   indicator: {
-    marginTop: 8,
     width: 20,
     height: 1,
-    backgroundColor: Colors.gray
+    backgroundColor: Colors.gray,
+    marginBottom: 24
   },
   container: {
+    paddingTop: 8,
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
     paddingHorizontal: 24,
-    backgroundColor: Colors.base100
+    paddingBottom: 34,
+    backgroundColor: Colors.base100,
+    flex: 1,
   }
 })

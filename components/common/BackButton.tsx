@@ -10,7 +10,7 @@ export default function BackButton({
 }: Props) {
   return <TouchableOpacity
     onPress={onPress}>
-    <View className='flex-row items-center justify-center w-8 h-8 rounded-full bg-base-200'>
+    <View className='items-center justify-center w-8 h-8 rounded-full bg-base-200'>
       <RadixIcon name='arrow-left' size={16} color={'white'} />
     </View>
   </TouchableOpacity>

@@ -26,10 +26,6 @@ const Pages = {
 function LoginPage() {
   const { page } = useLoginProvder()
   return (
-    <View className='pt-6'>
-      {
-        Pages[page]
-      }
-    </View>
+    Pages[page]
   )
 }
