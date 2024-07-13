@@ -6,7 +6,7 @@ import { NewsResponse } from "../cryptopanic/types"
 const SERVER_URL = Platform.OS === 'web' ? process.env.EXPO_PUBLIC_SERVER_URL : 'http://10.0.2.2:4000'
 
 const makeEndpoint = (url: string) => {
-  return `${SERVER_URL}/api${url}`
+  return `${SERVER_URL}/api/v1${url}`
 }
 
 export const fetchGlobalMarketData = () => fetcher<GlobalMarketData>({
