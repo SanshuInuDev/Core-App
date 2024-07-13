@@ -1,9 +1,9 @@
+import { IconButton } from '@/components/common/Button';
 import { LOGIN_PROVIDER, LOGIN_PROVIDER_TYPE } from "@web3auth/react-native-sdk";
 import React from 'react';
-import { Image, Text, View } from 'react-native';
-import { useWeb3AuthProvider } from '../Web3AuthProvider';
-import Button from '../common/Button';
+import { Image, View } from 'react-native';
 import { SheetManager } from "react-native-actions-sheet";
+import { useWeb3AuthProvider } from '../Web3AuthProvider';
 
 
 export default function SocialLoginButton() {
@@ -18,38 +18,38 @@ export default function SocialLoginButton() {
   }
   return (
     <View>
-      <Button
+      <IconButton
         className='mt-6'
         theme='outline'
         onPress={async () => {
           await onSocialLogin(LOGIN_PROVIDER.GOOGLE)
         }}
+        icon={
+          <Image
+            className='w-6 h-6 mr-1'
+            width={24}
+            height={24}
+            source={require('@/assets/images/google.png')}
+          />
+        }
       >
-        <Image
-          className='w-6 h-6 mr-1'
-          width={24}
-          height={24}
-          source={require('@/assets/images/google.png')}
-        />
-        <Text className='leading-6 text-white font-midnight-sans-st-36 text-4'>
-          Continue with Google
-        </Text>
-      </Button>
-      <Button
+        Continue with Google
+      </IconButton>
+      <IconButton
         className='mt-6'
         theme='outline'
         onPress={async () => {
           await onSocialLogin(LOGIN_PROVIDER.APPLE)
         }}
+        icon={
+          <Image
+            className='mr-1'
+            source={require('@/assets/images/apple.png')}
+          />
+        }
       >
-        <Image
-          className='mr-1'
-          source={require('@/assets/images/apple.png')}
-        />
-        <Text className='leading-6 text-white font-midnight-sans-st-36 text-4'>
-          Continue with Apple
-        </Text>
-      </Button>
+        Continue with Apple
+      </IconButton>
     </View>
   )
 }

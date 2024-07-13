@@ -3,7 +3,7 @@ import SearchButton from '@/components/common/SearchButton'
 import ConnectPage from '@/components/portfolio/ConnectPage'
 import MainPage from '@/components/portfolio/MainPage'
 import { useMemo, useState } from 'react'
-import { ScrollView, Text, View, Image } from 'react-native'
+import { ScrollView, Text, View } from 'react-native'
 
 export default function Portfolio() {
   const [pageNum, setPageNum] = useState<number>(0)

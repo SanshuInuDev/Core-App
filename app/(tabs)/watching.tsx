@@ -1,6 +1,6 @@
+import useAppProvider from "@/hooks/useAppProvider";
 import React from "react";
 import { Image, Text, View } from 'react-native';
-import useAppProvider from "@/hooks/useAppProvider";
 
 export default function Watching() {
   const {address} = useAppProvider()

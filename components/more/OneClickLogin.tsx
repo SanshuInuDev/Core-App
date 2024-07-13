@@ -1,40 +1,40 @@
-import { Image, Text, View } from 'react-native';
-import Button from '../common/Button';
-import SocialLoginButton from './SocialLoginButton';
+import { IconButton } from '@/components/common/Button';
 import useWalletAuth from '@/hooks/useWalletAuth';
+import { Image, View } from 'react-native';
+import SocialLoginButton from './SocialLoginButton';
 
 export default function OneClickLogin() {
   const { walletOpen } = useWalletAuth()
   return (
     <View>
       <SocialLoginButton />
-      <Button
+      <IconButton
         className='mt-6'
         theme='outline'
+        icon={
+          <Image
+            className='mr-1'
+            source={require('@/assets/images/Exchanges.png')}
+          />
+        }
       >
-        <Image
-          className='mr-1'
-          source={require('@/assets/images/Exchanges.png')}
-        />
-        <Text className='leading-6 text-white font-midnight-sans-st-36 text-4'>
-          Continue with exchange
-        </Text>
-      </Button>
-      <Button
+        Continue with exchange
+      </IconButton>
+      <IconButton
         className='mt-6'
         theme='outline'
         onPress={async () => {
           await walletOpen()
         }}
+        icon={
+          <Image
+            className='mr-1'
+            source={require('@/assets/images/Wallets.png')}
+          />
+        }
       >
-        <Image
-          className='mr-1'
-          source={require('@/assets/images/Wallets.png')}
-        />
-        <Text className='leading-6 text-white font-midnight-sans-st-36 text-4'>
-          Continue with Wallet
-        </Text>
-      </Button>
+        Continue with Wallet
+      </IconButton>
     </View>
   )
 }

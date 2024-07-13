@@ -1,9 +1,9 @@
-import { Alert, Text, View } from "react-native";
+import supabase from "@/lib/supabase";
+import { useState } from "react";
+import { Alert, View } from "react-native";
 import Button from "../common/Button";
 import Input from "../common/Input";
 import PasswordInput from "./PasswordInput";
-import { useState } from "react";
-import supabase from "@/lib/supabase";
 
 export default function EmailLogin() {
   const [email, setEmail] = useState<string>('')
@@ -40,9 +40,7 @@ export default function EmailLogin() {
         className='mt-6'
         onPress={signUpWithEmail}
       >
-        <Text className='leading-6 font-midnight-sans-st-36 text-4'>
-          Login
-        </Text>
+        Login
       </Button>
     </View>
   )

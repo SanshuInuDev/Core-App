@@ -1,4 +1,3 @@
-
 import { TrendingCoin } from "@/lib/coingecko/types";
 import { Image, Text, View } from "react-native";
 

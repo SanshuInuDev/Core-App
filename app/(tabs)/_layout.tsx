@@ -20,10 +20,9 @@ export default function TabLayout() {
           className='flex-1'
           colors={['rgba(13,5,8,0.2)', 'rgba(0,0,0,1)']}
         />
-
       }}>
       <Tabs.Screen
-        name="index"
+        name="market"
         options={{
           title: 'Market',
           tabBarIcon: ({ color }) => <RadixIcon name='magic-wand' size={20} color={color ?? 'white'} />

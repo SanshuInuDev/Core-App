@@ -1,18 +1,18 @@
+import BackButton from '@/components/common/BackButton';
+import Button from '@/components/common/Button';
+import SheetCloseButton from '@/components/common/SheetCloseButton';
 import Colors from '@/lib/Colors';
 import { Text, View } from 'react-native';
-import RadixIcon from '../RadixIcon';
-import BackButton from '../common/BackButton';
-import Button from '../common/Button';
-import SheetCloseButton from '../common/SheetCloseButton';
-import { useLoginProvder } from './LoginProvider';
 import { SheetManager } from 'react-native-actions-sheet';
+import RadixIcon from '../RadixIcon';
+import { useLoginProvder } from './LoginProvider';
 
 type Props = {}
 
 export default function VerifyCompletePage({ }: Props) {
   const { setPage } = useLoginProvder()
   return (
-    <View className='h-screen pb-[40%]'>
+    <View className='h-full'>
       <View className='flex-row items-center justify-center'>
         <BackButton
           onPress={() => {
@@ -32,18 +32,14 @@ export default function VerifyCompletePage({ }: Props) {
           You have successfully signed up to Sanshu!
         </Text>
       </View>
-      <View className='flex-row'>
-        <Button
-          onPress={() => {
-            SheetManager.hide('login-sheet')
-          }}
-          className='flex-1'
-        >
-          <Text className='text-sm text-center text-base-100 font-midnight-sans-st-36'>
-            Continue to dashboard
-          </Text>
-        </Button>
-      </View>
+      <Button
+        onPress={() => {
+          SheetManager.hide('login-sheet')
+        }}
+        className='w-full mb-6'
+      >
+        Continue to dashboard
+      </Button>
     </View>
   )
 }

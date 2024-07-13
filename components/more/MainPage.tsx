@@ -1,11 +1,7 @@
+import SheetCloseButton from '@/components/common/SheetCloseButton';
 import React, { useState } from 'react';
-import { Text,  View
-} from 'react-native';
-import {
-  ScrollView,
-  useSheetPayload
-} from 'react-native-actions-sheet';
-import SheetCloseButton from '../common/SheetCloseButton';
+import { Text, View } from 'react-native';
+import { ScrollView, useSheetPayload } from 'react-native-actions-sheet';
 import EmailLogin from './EmailLogin';
 import EmailSignup from './EmailSignup';
 import OneClickLogin from './OneClickLogin';

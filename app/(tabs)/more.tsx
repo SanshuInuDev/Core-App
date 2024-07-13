@@ -6,7 +6,7 @@ import SearchButton from '@/components/common/SearchButton';
 import MainButtonList from '@/components/more/MainButtonList';
 import useAppProvider from '@/hooks/useAppProvider';
 import useWalletAuth from '@/hooks/useWalletAuth';
-import { Text, View, ScrollView } from 'react-native';
+import { ScrollView, Text, View } from 'react-native';
 import { SheetManager } from 'react-native-actions-sheet';
 
 export default function More() {
@@ -69,9 +69,7 @@ export default function More() {
               }}
               className='flex-1'
             >
-              <Text className='text-sm text-center text-base-100 font-midnight-sans-st-36'>
-                Log out
-              </Text>
+              Log out
             </Button>
           </View> :
           <View className='flex-row pb-16'>
@@ -85,9 +83,7 @@ export default function More() {
               }}
               className='flex-full'
             >
-              <Text className='text-sm text-center text-base-100 font-midnight-sans-st-36'>
-                Log in
-              </Text>
+              Log in
             </Button>
             <View className='w-4' />
             <Button
@@ -101,9 +97,7 @@ export default function More() {
               }}
               className='flex-full'
             >
-              <Text className='text-sm text-center text-white font-midnight-sans-st-36'>
-                Sign up
-              </Text>
+              Sign up
             </Button>
           </View>
       }

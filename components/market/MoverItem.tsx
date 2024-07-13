@@ -1,8 +1,8 @@
+import RadixIcon from '@/components/RadixIcon';
 import Colors from '@/lib/Colors';
 import { CoinMarket } from '@/lib/types';
-import RadixIcon from '@/components/RadixIcon';
-import { Image, Text, View } from 'react-native';
 import { currencyForamt, percentFormat } from '@/lib/utils';
+import { Image, Text, View } from 'react-native';
 
 interface Props {
   data: CoinMarket

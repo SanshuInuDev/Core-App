@@ -6,7 +6,6 @@ interface Props {
 }
 
 export default function TrendingSocialItem({ data }: Props) {
-
   const defferentTiem = new Date().getTime() - new Date(data.published_at).getTime();
   const time = defferentTiem / 1000 / 60;
   let timeTxt = Math.ceil(time) + 'min'

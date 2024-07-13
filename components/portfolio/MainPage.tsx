@@ -1,8 +1,9 @@
 import useAppProvider from '@/hooks/useAppProvider'
-import React from 'react'
-import { View, Text, Image, TouchableOpacity } from 'react-native'
-import RadixIcon from '../RadixIcon'
 import Colors from '@/lib/Colors'
+import React from 'react'
+import { Image, Text, TouchableOpacity, View } from 'react-native'
+import RadixIcon from '../RadixIcon'
+import MoreButton from '../common/MoreButton'
 
 type Props = {}
 
@@ -233,14 +234,7 @@ export default function MainPage({ }: Props) {
           <Text className='flex-1 text-white font-midnight-sans-st-36'>
             Recent transactions
           </Text>
-          <TouchableOpacity
-            onPress={() => {
-            }}>
-            <View className='flex-row items-center px-4 py-2 rounded-full bg-base-200'>
-              <Text className='mr-1 text-sm text-white font-midnight-sans-st-36'>More</Text>
-              <RadixIcon name='arrow-right' size={16} color={'white'} />
-            </View>
-          </TouchableOpacity>
+          <MoreButton />
         </View>
         <View className='flex-row py-4 border-b border-base-200'>
           <View className='flex-row items-center flex-1'>
