@@ -1,9 +1,9 @@
 import { TouchableOpacity, View } from "react-native"
-import { SheetManager } from "react-native-actions-sheet"
+import { SheetManager, Sheets } from "react-native-actions-sheet"
 import RadixIcon from "../RadixIcon"
 
 interface Props {
-  id: string
+  id: keyof Sheets
 }
 
 export default function SheetCloseButton(

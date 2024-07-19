@@ -2,7 +2,13 @@ import DiscoverSheet from '@/components/market/DiscoverSheet';
 import MarketSearchSheet from '@/components/market/MarketSearchSheet';
 import NewsSheet from '@/components/market/NewsSheet';
 import LoginSheet from '@/components/more/LoginSheet';
-import { SheetDefinition, registerSheet } from 'react-native-actions-sheet';
+import AddPortfiolioSheet from '@/components/portfolio/AddPortfiolioSheet';
+import CryptoExchangeSheet from '@/components/portfolio/CryptoExchangeSheet';
+import ManualAddAssets from '@/components/portfolio/ManualAddAssets';
+import ManualAddPortfolioSheet from '@/components/portfolio/ManualAddPortfolioSheet';
+import PortfolioSelectSheet from '@/components/portfolio/PortfolioSelectSheet';
+import WalletConnectSheet from '@/components/portfolio/WalletConnectSheet';
+import { RouteDefinition, SheetDefinition, registerSheet } from 'react-native-actions-sheet';
 
 /**
  * Registering the sheets here because otherwise sheet closes on
@@ -16,6 +22,14 @@ registerSheet('login-sheet', LoginSheet);
 registerSheet('market-search-sheet', MarketSearchSheet);
 registerSheet('discover-sheet', DiscoverSheet);
 registerSheet('news-sheet', NewsSheet);
+
+/** portfolio page */
+registerSheet('portfolio-wallet-connect-sheet', WalletConnectSheet)
+registerSheet('portfolio-crypto-exchange-sheet', CryptoExchangeSheet)
+registerSheet('portfolio-add-portfolio-sheet', AddPortfiolioSheet)
+registerSheet('portfolio-select-sheet', PortfolioSelectSheet)
+registerSheet('portfolio-manual-add-sheet', ManualAddPortfolioSheet)
+registerSheet('portfolio-manual-add-assets-sheet', ManualAddAssets)
 export { };
 
 
@@ -26,6 +40,32 @@ declare module 'react-native-actions-sheet' {
         mode: 'Login' | 'Signup';
       };
     }>;
+    'market-search-sheet': SheetDefinition,
+    'discover-sheet': SheetDefinition,
+    'news-sheet': SheetDefinition,
+
+    'portfolio-wallet-connect-sheet': SheetDefinition,
+    'portfolio-crypto-exchange-sheet': SheetDefinition<{
+      routes: {
+        'exchange-select': RouteDefinition
+        // Route B with params.
+        'coninbase-exchange': RouteDefinition
+      };
+    }>,
+    'portfolio-add-portfolio-sheet': SheetDefinition,
+    'portfolio-select-sheet': SheetDefinition,
+    'portfolio-manual-add-sheet': SheetDefinition,
+    'portfolio-manual-add-assets-sheet': SheetDefinition<{
+      routes: {
+        'discovers': RouteDefinition
+        // Route B with params.
+        'amount': RouteDefinition
+        'price-per-coin': RouteDefinition
+        'date': RouteDefinition
+        'fee': RouteDefinition
+        'notes': RouteDefinition
+      };
+    }>,
   }
 }
 /**

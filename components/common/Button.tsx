@@ -14,6 +14,12 @@ type ThemeStyles = {
   text: string;
 };
 
+const sizePadding = {
+  default: 'px-4 py-3',
+  sm: 'px-3 py-2',
+  lg: 'px-4 py-3'
+};
+
 const themeClassName: { [key in Theme]: ThemeStyles } = {
   dark: {
     bg: 'bg-base-200',
@@ -40,7 +46,7 @@ const themeClassName: { [key in Theme]: ThemeStyles } = {
 const sizes = {
   default: '',
   sm: 'text-sm',
-  lg: 'text-lg'
+  lg: 'text-lg',
 }
 
 export default function Button({
@@ -48,20 +54,24 @@ export default function Button({
   children,
   size = 'default',
   className: _cls,
+  disabled,
   ...reset
 }: Props) {
   return (
     <TouchableOpacity
       {...reset}
+      disabled={disabled}
       className={twMerge(
-        'flex items-center justify-center rounded-full px-4 py-3 flex-row',
-        themeClassName[theme].bg
+        'flex items-center justify-center rounded-full flex-row ',
+        themeClassName[theme].bg,
+        sizePadding[size],
+        disabled ? "bg-opacity-20 text-gray" : ""
       )}
     >
       <Text className={twMerge(
         'text-center font-midnight-sans-st-36',
         sizes[size],
-        themeClassName[theme].text
+        disabled ? 'text-gray' : themeClassName[theme].text
       )}>
         {children}
       </Text>
@@ -84,8 +94,9 @@ export function IconButton({
     <TouchableOpacity
       {...reset}
       className={twMerge(
-        'flex items-center justify-center rounded-full px-4 py-3 flex-row',
-        themeClassName[theme].bg
+        'flex items-center justify-center rounded-full flex-row',
+        themeClassName[theme].bg,
+        sizePadding[size]
       )}
     >
       <View className="flex-row items-center justify-center">

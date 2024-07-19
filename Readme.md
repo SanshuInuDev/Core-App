@@ -5,7 +5,7 @@
 ### Run Demo
 
 - `npm` to install dependencies
-```shell
+```sh
 npm install
 ```
 - Fill `.env.template` and save as `.env`
@@ -18,8 +18,28 @@ EXPO_PUBLIC_WALLET_CONNECT_PROJECT_ID =
 EXPO_PUBLIC_SUPABASE_URL = 
 EXPO_PUBLIC_SUPABASE_API_KEY = 
 ```
+- Install EAS CLI
+```sh
+- npm install -g eas-cli
+```
+- Log in or sign up for an Expo account
+```sh
+- eas login
+```
+- Initialize and link the project to EAS
+```sh
+- eas init
+```
+- Configure project for EAS Build
+```sh
+- eas build:configure
+```
+- Create a build for the development profile
+```sh
+- eas build --platform android --profile development
+```
 - start development app with emulator
-```shell
+```sh
 - npm start
 - npx expo start
 ```

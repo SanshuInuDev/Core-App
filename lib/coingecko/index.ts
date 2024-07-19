@@ -7,7 +7,6 @@ const coingeckoFetch = async <T>({ endpoint, params }: CoingeckoFetchOptions): P
   if (params) {
     Object.keys(params).forEach(key => url.searchParams.append(key, params[key].toString()));
   }
-  console.log('coingecko url: ', url.toString());
   const response = await fetch(url.toString(), {
     headers: {
       'accept': 'application/json',
@@ -28,7 +27,6 @@ export const fetchTrendingData = async (): Promise<TrendingCoin[]> => {
       endpoint: 'search/trending',
     });
 
-    console.log('Trending Data:', trendingData.coins);
     return trendingData.coins;
   } catch (error) {
     console.error('Error fetching trending data:', error);
@@ -48,7 +46,6 @@ export const fetchCoinsByMarketCap = async (): Promise<MarketCoin[]> => {
       },
     });
 
-    console.log('Coins by Market Cap:', coins);
     return coins;
   } catch (error) {
     console.error('Error fetching coins by market cap:', error);
@@ -62,7 +59,6 @@ export const fetchGlobalMarketData = async (): Promise<GlobalMarketData> => {
       endpoint: 'global',
     });
 
-    console.log('Global Market Data:', globalData);
     return globalData;
   } catch (error) {
     console.error('Error fetching global market data:', error);

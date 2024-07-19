@@ -14,7 +14,6 @@ const redirectUrl =
     ? Linking.createURL("more", {})
     : Linking.createURL("more", { scheme: "com.truepartner312.sanshuapp" });
 
-console.log('- redirectUrl : ', redirectUrl)
 
 const chainConfig = {
   chainNamespace: ChainNamespace.EIP155,
