@@ -17,8 +17,6 @@ export default function EmailLogin() {
       email,
       password
     })
-    console.log(data)
-    console.log(error)
     if (error) Alert.alert(error.message)
   }
 

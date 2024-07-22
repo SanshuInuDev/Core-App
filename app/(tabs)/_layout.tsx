@@ -29,17 +29,17 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="watching"
-        options={{
-          title: 'Watching',
-          tabBarIcon: ({ color, }) => <RadixIcon name='target' size={20} color={color ?? 'white'} />
-        }}
-      />
-      <Tabs.Screen
         name="portfolio"
         options={{
           title: 'Portfolio',
           tabBarIcon: ({ color }) => <RadixIcon name='eye-open' size={20} color={color ?? 'white'} />
+        }}
+      />
+      <Tabs.Screen
+        name="watching"
+        options={{
+          title: 'Watching',
+          tabBarIcon: ({ color, }) => <RadixIcon name='target' size={20} color={color ?? 'white'} />
         }}
       />
       <Tabs.Screen

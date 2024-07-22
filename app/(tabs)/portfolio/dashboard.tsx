@@ -1,38 +1,43 @@
+import RadixIcon from '@/components/RadixIcon'
+import MoreButton from '@/components/common/MoreButton'
 import useAppProvider from '@/hooks/useAppProvider'
 import Colors from '@/lib/Colors'
 import React from 'react'
 import { Image, Text, TouchableOpacity, View } from 'react-native'
-import RadixIcon from '../RadixIcon'
-import MoreButton from '../common/MoreButton'
+import { SheetManager } from 'react-native-actions-sheet'
 
-type Props = {}
-
-export default function MainPage({ }: Props) {
+export default function PortfolioDashboard() {
   const { address } = useAppProvider()
   return (
     <View className='pb-28'>
-      <View className='flex-row items-center'>
-        <Text className='mr-2 text-2xl text-white font-midnight-sans-st-36'>
-          {`${address?.substring(0, 3)}.${address?.substring(address.length - 5, address.length - 1)}`}
-        </Text>
-        <View className='items-center justify-center w-6 h-6 border rounded-full border-gray'>
-          <RadixIcon name='caret-sort' size={16} color={Colors.white} />
-        </View>
-      </View>
-      <View className='flex-row'>
-        <Text className='mt-2 mr-2 text-sm text-white font-midnight-sans-st-36'>
-          {'$78,060.38'}
-        </Text>
-        <View className='flex-row items-center justify-center'>
-          <Text className='mt-2 text-sm text-green font-midnight-sans-st-36'>
-            {'2.54%'}
+      <TouchableOpacity
+        onPress={() => {
+          SheetManager.show('portfolio-add-portfolio-sheet')
+        }}
+      >
+        <View className='flex-row items-center'>
+          <Text className='mr-2 text-2xl text-white font-midnight-sans-st-36'>
+            {`${address?.substring(0, 3)}.${address?.substring(address.length - 5, address.length - 1)}`}
           </Text>
-          <View className='mt-2'>
-            <RadixIcon size={16} color={Colors.green} name='triangle-up' />
+          <View className='items-center justify-center w-6 h-6 border rounded-full border-gray'>
+            <RadixIcon name='caret-sort' size={16} color={Colors.white} />
           </View>
         </View>
-      </View>
-      <View className='flex-row mt-2'>
+        <View className='flex-row mt-2'>
+          <Text className='mt-2 mr-2 text-sm text-white font-midnight-sans-st-36'>
+            {'$78,060.38'}
+          </Text>
+          <View className='flex-row items-center justify-center'>
+            <Text className='mt-2 text-sm text-green font-midnight-sans-st-36'>
+              {'2.54%'}
+            </Text>
+            <View className='mt-2'>
+              <RadixIcon size={16} color={Colors.green} name='triangle-up' />
+            </View>
+          </View>
+        </View>
+      </TouchableOpacity>
+      <View className='flex-row mt-4'>
         <TouchableOpacity
           onPress={() => {
           }}>
