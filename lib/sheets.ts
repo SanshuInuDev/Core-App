@@ -8,6 +8,10 @@ import ManualAddAssets from '@/components/portfolio/ManualAddAssets';
 import ManualAddPortfolioSheet from '@/components/portfolio/ManualAddPortfolioSheet';
 import PortfolioSelectSheet from '@/components/portfolio/PortfolioSelectSheet';
 import WalletConnectSheet from '@/components/portfolio/WalletConnectSheet';
+import AddAddressSheet from '@/components/watching/AddAddressSheet';
+import AddWatchListSheet from '@/components/watching/AddWatchListSheet';
+import SwitchList from '@/components/watching/SwitchListSheet';
+import TransactionSheet from '@/components/watching/TransactionSheet';
 import { RouteDefinition, SheetDefinition, registerSheet } from 'react-native-actions-sheet';
 
 /**
@@ -30,6 +34,14 @@ registerSheet('portfolio-add-portfolio-sheet', AddPortfiolioSheet)
 registerSheet('portfolio-select-sheet', PortfolioSelectSheet)
 registerSheet('portfolio-manual-add-sheet', ManualAddPortfolioSheet)
 registerSheet('portfolio-manual-add-assets-sheet', ManualAddAssets)
+
+
+/** watching page */
+registerSheet('watching-add-list-sheet', AddWatchListSheet)
+registerSheet('watching-add-address-sheet', AddAddressSheet)
+registerSheet('watching-transaction-sheet', TransactionSheet)
+registerSheet('watching-switch-list-sheet', SwitchList)
+
 export { };
 
 
@@ -66,6 +78,10 @@ declare module 'react-native-actions-sheet' {
         'notes': RouteDefinition
       };
     }>,
+    'watching-add-list-sheet': SheetDefinition,
+    'watching-add-address-sheet': SheetDefinition,
+    'watching-transaction-sheet': SheetDefinition,
+    'watching-switch-list-sheet': SheetDefinition,
   }
 }
 /**
