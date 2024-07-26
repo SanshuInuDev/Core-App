@@ -25,9 +25,7 @@ export const fetcher: FetchFunction = async <TResponse, TBody = undefined>({
   if (body && (method === 'POST' || method === 'PUT')) {
     options.body = JSON.stringify(body);
   }
-
   const response = await fetch(url.toString(), options);
-
   if (!response.ok) {
     throw new Error(`Error fetching data: ${response.statusText}`);
   }

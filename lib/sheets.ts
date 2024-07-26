@@ -7,6 +7,7 @@ import CryptoExchangeSheet from '@/components/portfolio/CryptoExchangeSheet';
 import ManualAddAssets from '@/components/portfolio/ManualAddAssets';
 import ManualAddPortfolioSheet from '@/components/portfolio/ManualAddPortfolioSheet';
 import PortfolioSelectSheet from '@/components/portfolio/PortfolioSelectSheet';
+import TransakSheet from '@/components/portfolio/TransakSheet';
 import WalletConnectSheet from '@/components/portfolio/WalletConnectSheet';
 import { RouteDefinition, SheetDefinition, registerSheet } from 'react-native-actions-sheet';
 
@@ -30,6 +31,8 @@ registerSheet('portfolio-add-portfolio-sheet', AddPortfiolioSheet)
 registerSheet('portfolio-select-sheet', PortfolioSelectSheet)
 registerSheet('portfolio-manual-add-sheet', ManualAddPortfolioSheet)
 registerSheet('portfolio-manual-add-assets-sheet', ManualAddAssets)
+
+registerSheet('portfolio-transak-sheet', TransakSheet)
 export { };
 
 
@@ -66,6 +69,7 @@ declare module 'react-native-actions-sheet' {
         'notes': RouteDefinition
       };
     }>,
+    'portfolio-transak-sheet': SheetDefinition,
   }
 }
 /**
