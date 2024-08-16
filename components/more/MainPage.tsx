@@ -37,8 +37,8 @@ export default function MainPage({ }: Props) {
             By proceeding, you agree to Sanshu <Text className='text-white'>Terms of use</Text> & <Text className='text-white'>Privacy Policy</Text>.
           </Text>
         </View>
+        <WalletAuthModal />
       </ScrollView>
-      <WalletAuthModal />
     </View>
   )
 }

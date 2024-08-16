@@ -81,3 +81,63 @@ interface Currency {
   slug: string
   url: string
 }
+
+export interface PortfolioCrypto {
+  "token_address": `0x${string}`,
+  "name": string,
+  "symbol": string,
+  "logo": string,
+  "thumbnail": string,
+  "decimals": number,
+  "balance": string,
+  "possible_spam": boolean,
+  "verified_contract": boolean,
+  "usd_price": number,
+  "usd_price_24hr_percent_change": number,
+  "usd_price_24hr_usd_change": number,
+  "usd_value_24hr_usd_change": number,
+  "usd_value": number,
+  "portfolio_percentage": number,
+  "balance_formatted": string,
+  "native_token": boolean,
+  "total_supply": string,
+  "total_supply_formatted": string,
+  "percentage_relative_to_total_supply": number
+}
+
+export interface PortfolioNft {
+  token_address: string
+  contract_type: string
+  name: string
+  symbol: string
+  possible_spam: boolean
+  verified_collection: boolean
+  count?: number | undefined
+  collection_logo?: string | undefined
+  collection_banner_image?: string | undefined
+}
+
+interface TokenDetails {
+  name: string;
+  symbol: string;
+  label: string;
+  decimals: string;
+  address: string;
+}
+
+export interface Transaction {
+  hash: string,
+  timeStamp: string;
+  receive: string;
+  from: string;
+  to: string;
+  chainId: string;
+  value: string;
+  token: TokenDetails | null;
+}
+
+export interface TokenInfo {
+  token: string
+  symbol: string
+  chainId: string
+}

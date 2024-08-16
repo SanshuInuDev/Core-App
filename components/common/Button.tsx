@@ -102,7 +102,7 @@ export function IconButton({
       <View className="flex-row items-center justify-center">
         {icon}
         <Text className={twMerge(
-          'text-center font-midnight-sans-st-36',
+          'text-center font-midnight-sans-st-36 ml-1',
           sizes[size],
           themeClassName[theme].text
         )}>
@@ -112,4 +112,5 @@ export function IconButton({
     </TouchableOpacity>
   );
 }
+
 

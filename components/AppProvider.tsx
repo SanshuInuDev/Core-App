@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react"
+import { createContext, useState } from "react"
 
 export const AppContext = createContext<{
   address: string | null,
@@ -18,6 +18,7 @@ export default function AppProvider(
   { children }: AppProviderProps
 ) {
   const [address, setAddress] = useState<string | null>(null)
+  console.log(address)
   return (
     <AppContext.Provider
       value={{

@@ -7,6 +7,8 @@ import CryptoExchangeSheet from '@/components/portfolio/CryptoExchangeSheet';
 import ManualAddAssets from '@/components/portfolio/ManualAddAssets';
 import ManualAddPortfolioSheet from '@/components/portfolio/ManualAddPortfolioSheet';
 import PortfolioSelectSheet from '@/components/portfolio/PortfolioSelectSheet';
+import SendSheet from '@/components/portfolio/SendSheet';
+import SwapSheet from '@/components/portfolio/SwapSheet';
 import TransakSheet from '@/components/portfolio/TransakSheet';
 import WalletConnectSheet from '@/components/portfolio/WalletConnectSheet';
 import { RouteDefinition, SheetDefinition, registerSheet } from 'react-native-actions-sheet';
@@ -33,6 +35,8 @@ registerSheet('portfolio-manual-add-sheet', ManualAddPortfolioSheet)
 registerSheet('portfolio-manual-add-assets-sheet', ManualAddAssets)
 
 registerSheet('portfolio-transak-sheet', TransakSheet)
+registerSheet('portfolio-send-sheet', SendSheet)
+registerSheet('portfolio-swap-sheet', SwapSheet)
 export { };
 
 
@@ -70,6 +74,21 @@ declare module 'react-native-actions-sheet' {
       };
     }>,
     'portfolio-transak-sheet': SheetDefinition,
+    'portfolio-send-sheet': SheetDefinition<{
+      routes: {
+        'input': RouteDefinition
+        'select': RouteDefinition
+        'review': RouteDefinition
+        'complete': RouteDefinition
+      };
+    }>,
+    'portfolio-swap-sheet': SheetDefinition<{
+      routes: {
+        'input': RouteDefinition
+        'review': RouteDefinition
+        'complete': RouteDefinition
+      };
+    }>,
   }
 }
 /**
