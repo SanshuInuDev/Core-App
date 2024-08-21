@@ -65,7 +65,7 @@ export default function More() {
             <Button
               onPress={() => {
                 disconnect()
-                logout()
+                // logout()
               }}
               className='flex-1'
             >

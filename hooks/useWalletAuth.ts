@@ -19,7 +19,7 @@ export function useWalletAuth() {
       provider.disconnect()
       setAddress(null)
     }
-  }, [isConnected, provider])
+  }, [isConnected, provider, address])
 
   const walletOpen = useCallback(async () => {
     try {

@@ -1,22 +1,18 @@
 import BackButton from "@/components/common/BackButton";
 import SheetCloseButton from "@/components/common/SheetCloseButton";
 import Colors from "@/lib/Colors";
+import { TokenInfo } from "@/lib/types";
+import { Web3Provider } from '@ethersproject/providers';
+import { ChainId, CoinKey } from "@lifi/sdk";
+import { useWalletConnectModal } from "@walletconnect/modal-react-native";
+import { Contract, ethers } from 'ethers';
+import { createContext, useCallback, useContext, useEffect, useState } from "react";
 import { Image, Text, TextInput, View } from "react-native";
-import { RouteScreenProps } from "react-native-actions-sheet";
+import { RouteScreenProps, SheetManager } from "react-native-actions-sheet";
+import { erc20Abi } from "viem";
 import AppSheet from "../AppSheet";
 import RadixIcon from "../RadixIcon";
 import Button, { IconButton } from "../common/Button";
-import { createContext, useCallback, useContext, useEffect, useState } from "react";
-import { TokenInfo } from "@/lib/types";
-import { ChainId, ChainKey, CoinKey, executeRoute, getRoutes } from "@lifi/sdk";
-import useAppProvider from "@/hooks/useAppProvider";
-import { useWalletConnectModal } from "@walletconnect/modal-react-native";
-import { WalletClient, createWalletClient, custom, parseEther } from "viem";
-import { useMemo } from 'react'
-import { ethers, Contract } from 'ethers';
-import { mainnet, sepolia } from "viem/chains";
-import { Web3Provider } from '@ethersproject/providers';
-
 
 
 const SwapContext = createContext<{
@@ -39,143 +35,7 @@ const useSwap = () => useContext(SwapContext);
 
 function InputAmount({ router }: RouteScreenProps<"portfolio-swap-sheet", "input">) {
   const { amount, setAmount, fromToken, toToken, setFromToken, setToToken } = useSwap()
-  const { provider, address, isConnected } = useWalletConnectModal()
-  const [client, setClient] = useState<Web3Provider>();
-  useEffect(() => {
-    if (isConnected && provider) {
-      console.log(isConnected)
-      const _client = new ethers.providers.Web3Provider(provider);
-      console.log("_client", _client)
-      setClient(_client);
-    }
-  }, [isConnected, provider]);
 
-  const onSwap = useCallback(async () => {
-    try {
-      if (!provider)
-        return
-      const fromChain = ChainId.ETH;
-      const fromToken = CoinKey.USDT;
-      const toChain = ChainId.ETH;
-      const toToken = CoinKey.USDC;
-      const fromAmount = '1000000';
-      const fromAdress = address!
-      const getQuote = async (fromChain: number, toChain: number, fromToken: string, toToken: string, fromAmount: string, fromAddress: string) => {
-        const result = await fetch(`https://li.quest/v1/quote?fromChain=${fromChain}&toChain=${toChain}&fromToken=${fromToken}&toToken=${toToken}&fromAddress=${fromAddress}&fromAmount=${fromAmount}`);
-        return await result.json();
-      }
-      const quote = await getQuote(fromChain, toChain, fromToken, toToken, fromAmount, fromAdress);
-
-
-      console.log('Okay')
-      if (!client) {
-        console.log(client)
-        console.log('return')
-        return;
-      }
-
-      const signer = client.getSigner();
-
-      // await checkAndSetAllowance(signer, quote.action.fromToken.address, quote.estimate.approvalAddress, fromAmount)
-
-      // console.log('Okay')
-      const tx = await signer.sendTransaction(quote.transactionRequest);
-      const result = await tx.wait();
-    } catch (error) {
-      console.error(error)
-    }
-  }, [client])
-
-  const ERC20_ABI = [
-    {
-      "name": "approve",
-      "inputs": [
-        {
-          "internalType": "address",
-          "name": "spender",
-          "type": "address"
-        },
-        {
-          "internalType": "uint256",
-          "name": "amount",
-          "type": "uint256"
-        }
-      ],
-      "outputs": [
-        {
-          "internalType": "bool",
-          "name": "",
-          "type": "bool"
-        }
-      ],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "name": "allowance",
-      "inputs": [
-        {
-          "internalType": "address",
-          "name": "owner",
-          "type": "address"
-        },
-        {
-          "internalType": "address",
-          "name": "spender",
-          "type": "address"
-        }
-      ],
-      "outputs": [
-        {
-          "internalType": "uint256",
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-    }
-  ];
-
-  const checkAndSetAllowance = async (wallet: ethers.providers.JsonRpcSigner, tokenAddress: string, approvalAddress: string, amount: string) => {
-    // Transactions with the native token don't need approval
-    if (tokenAddress === ethers.constants.AddressZero) {
-      return
-    }
-    const erc20 = new Contract(tokenAddress, ERC20_ABI, wallet);
-    const allowance = await erc20.allowance(await wallet.getAddress(), approvalAddress);
-
-    if (allowance.lt(amount)) {
-      const approveTx = await erc20.approve(approvalAddress, amount);
-      await approveTx.wait();
-    }
-  }
-
-  const onSignMessage = async () => {
-    if (!provider) {
-      return;
-    }
-
-    const accounts: string[] | undefined = await provider?.request({
-      method: 'eth_accounts',
-    });
-
-    if (!accounts) {
-      return;
-    }
-
-    const address = accounts[0];
-
-    const signature = await provider.request({
-      method: 'personal_sign',
-      params: ["0x01", address],
-    });
-
-    return {
-      method: 'sign message',
-      signature: signature,
-    };
-  };
   return (
     <View className='h-full'>
       <View className='flex-row items-center justify-between pb-6'>
@@ -196,15 +56,19 @@ function InputAmount({ router }: RouteScreenProps<"portfolio-swap-sheet", "input
                 className="text-2xl text-white font-midnight-sans-st-36"
               />
               <Text className="ml-1 text-2xl text-gray font-midnight-sans-st-36">
-                ETH
+                USDT
               </Text>
             </View>
             <View className="flex-row items-center justify-center px-3 py-2.5 rounded-full bg-base-200">
               <Image
-                source={require('@/assets/images/Ethereum.png')}
+                source={{
+                  uri: 'https://logo.moralis.io/0x1_0xdac17f958d2ee523a2206206994597c13d831ec7_3282f332c2ac2948929f01fe7d921c51',
+                  width: 24,
+                  height: 24
+                }}
               />
               <Text className="mx-1 text-sm text-white font-midnight-sans-rd-36">
-                ETH
+                USDT
               </Text>
               <RadixIcon name="caret-down" color={Colors.white} />
             </View>
@@ -231,15 +95,19 @@ function InputAmount({ router }: RouteScreenProps<"portfolio-swap-sheet", "input
                 className="text-2xl text-white font-midnight-sans-st-36"
               />
               <Text className="ml-1 text-2xl text-gray font-midnight-sans-st-36">
-                SANSHU
+                USDC
               </Text>
             </View>
             <View className="flex-row items-center justify-center px-3 py-2.5 rounded-full bg-base-200">
               <Image
-                source={require('@/assets/images/Sanshu.png')}
+                source={{
+                  uri: 'https://logo.moralis.io/0x1_0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48_ac01a87aaf98ddb0f349ee4ebe97f0d8',
+                  width: 24,
+                  height: 24
+                }}
               />
               <Text className="mx-1 text-sm text-white font-midnight-sans-rd-36">
-                SANSHU
+                USDC
               </Text>
               <RadixIcon name="caret-down" color={Colors.white} />
             </View>
@@ -298,8 +166,7 @@ function InputAmount({ router }: RouteScreenProps<"portfolio-swap-sheet", "input
         <Button
           theme="dark"
           onPress={() => {
-            // router.navigate('review')
-            onSwap()
+            router.navigate('review')
           }}
         >
           Review
@@ -310,7 +177,65 @@ function InputAmount({ router }: RouteScreenProps<"portfolio-swap-sheet", "input
 }
 
 function Review({ router }: RouteScreenProps<"portfolio-swap-sheet", "review">) {
-  const { amount, fromToken, toToken } = useSwap()
+  // const { amount, setAmount, fromToken, toToken, setFromToken, setToToken } = useSwap()
+  const { provider, address, isConnected } = useWalletConnectModal()
+  const [client, setClient] = useState<Web3Provider>();
+
+  useEffect(() => {
+    if (isConnected && provider) {
+      console.log(isConnected)
+      const _client = new ethers.providers.Web3Provider(provider);
+      console.log("_client", _client)
+      setClient(_client);
+    }
+  }, [isConnected, provider]);
+
+  const onSwap = useCallback(async () => {
+    try {
+      if (!provider)
+        return
+      const fromChain = ChainId.ETH;
+      const fromToken = CoinKey.USDT;
+      const toChain = ChainId.ETH;
+      const toToken = CoinKey.USDC;
+      const fromAmount = '1000000';
+      const fromAdress = address!
+      const getQuote = async (fromChain: number, toChain: number, fromToken: string, toToken: string, fromAmount: string, fromAddress: string) => {
+        const result = await fetch(`https://li.quest/v1/quote?fromChain=${fromChain}&toChain=${toChain}&fromToken=${fromToken}&toToken=${toToken}&fromAddress=${fromAddress}&fromAmount=${fromAmount}`);
+        return await result.json();
+      }
+      const quote = await getQuote(fromChain, toChain, fromToken, toToken, fromAmount, fromAdress);
+
+      if (!client) {
+        console.log(client)
+        console.log('return')
+        return;
+      }
+
+      const signer = client.getSigner();
+
+      await checkAndSetAllowance(signer, quote.action.fromToken.address, quote.estimate.approvalAddress, fromAmount)
+
+      const tx = await signer.sendTransaction(quote.transactionRequest);
+      const result = await tx.wait();
+    } catch (error) {
+      console.error(error)
+    }
+  }, [client])
+
+  const checkAndSetAllowance = async (wallet: ethers.providers.JsonRpcSigner, tokenAddress: string, approvalAddress: string, amount: string) => {
+    // Transactions with the native token don't need approval
+    if (tokenAddress === ethers.constants.AddressZero) {
+      return
+    }
+    const erc20 = new Contract(tokenAddress, erc20Abi, wallet);
+    const allowance = await erc20.allowance(await wallet.getAddress(), approvalAddress);
+    if (allowance.lt(amount)) {
+      const approveTx = await erc20.approve(approvalAddress, amount);
+      await approveTx.wait();
+    }
+  }
+
   return (
     <View className='h-full'>
       <View className='flex-row items-center justify-between pb-6'>
@@ -320,7 +245,7 @@ function Review({ router }: RouteScreenProps<"portfolio-swap-sheet", "review">) 
           }}
         />
         <Text className='text-white text-5 font-midnight-sans-st-36'>
-          Swap & Bridge
+          Review swap
         </Text>
         <SheetCloseButton id='portfolio-swap-sheet' />
       </View>
@@ -330,12 +255,12 @@ function Review({ router }: RouteScreenProps<"portfolio-swap-sheet", "review">) 
             Swap
           </Text>
           <Text className="text-sm text-white font-midnight-sans-st-36">
-            {amount} {fromToken?.symbol}
+            {1} {'USDC'}
           </Text>
         </View>
         <View className="flex-row justify-between py-4 border-b border-gray">
           <Text className="text-sm text-gray font-midnight-sans-st-36">
-            Minimum received
+            1 USDC
           </Text>
           <Text className="text-sm text-white font-midnight-sans-st-36">
             0xf.de96
@@ -376,7 +301,8 @@ function Review({ router }: RouteScreenProps<"portfolio-swap-sheet", "review">) 
       </View>
       <View className="pb-12">
         <Button
-          onPress={() => {
+          onPress={async () => {
+            await onSwap()
             router.navigate('complete')
           }}
         >
@@ -409,13 +335,13 @@ function Complete({ router }: RouteScreenProps<"portfolio-swap-sheet", "complete
           Swap confirmed
         </Text>
         <Text className="text-sm text-center text-gray font-midnight-sans-rd-36 mt-3.5">
-          10 ETH to 100,000.59 SANSHU swap successful. You will receive a notification when your assets are deposited in your wallet.
+          1 USDT to 1 USDC swap successful. You will receive a notification when your assets are deposited in your wallet.
         </Text>
       </View>
       <View className="pb-12">
         <Button
           onPress={() => {
-            router.navigate('complete')
+            SheetManager.hide('portfolio-swap-sheet')
           }}
         >
           Go Home

@@ -6,7 +6,6 @@ import EmailLogin from './EmailLogin';
 import EmailSignup from './EmailSignup';
 import OneClickLogin from './OneClickLogin';
 import PageSwitch from './PageSwitch';
-import WalletAuthModal from './WalletAuthModal';
 
 type Props = {}
 
@@ -37,7 +36,6 @@ export default function MainPage({ }: Props) {
             By proceeding, you agree to Sanshu <Text className='text-white'>Terms of use</Text> & <Text className='text-white'>Privacy Policy</Text>.
           </Text>
         </View>
-        <WalletAuthModal />
       </ScrollView>
     </View>
   )

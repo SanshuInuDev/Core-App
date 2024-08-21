@@ -21,6 +21,7 @@ import './global.css';
 import 'expo-dev-client';
 import AppProvider from '@/components/AppProvider';
 import Web3AuthProvider from '@/components/Web3AuthProvider';
+import WalletAuthModal from '@/components/more/WalletAuthModal';
 
 // export {
 //   // Catch any errors thrown by the Layout component.
@@ -93,6 +94,7 @@ function RootLayoutNav() {
           </Stack>
         </SheetProvider>
       </SafeAreaView>
+      <WalletAuthModal />
     </ThemeProvider>
   );
 }
