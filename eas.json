@@ -12,7 +12,7 @@
         "buildType": "apk"
       },
       "env": {
-        "EXPO_PUBLIC_SERVER_URL": "http://10.0.2.2:4000",
+        "EXPO_PUBLIC_SERVER_URL": "https://core-app-backend.vercel.app",
         "EXPO_PUBLIC_COINGECKO_API": "CG-Pkmp2nzF5drgwkvbC4wVtsm4",
         "EXPO_PUBLIC_CRYPTOPANIC_API": "54b9c4ec5db577b00bc094d840c7fdf181d5dd91",
         "EXPO_PUBLIC_WEB3AUTH_CLIENT_ID": "BMtKZVdsWXpjNNLxuzbTE4gwxJlkO5wxP6x0nQoi0OfOMXSdDQTu4bmsyOiBrr9_CTJjAHGzmfS1uijvYbdSYp0",
