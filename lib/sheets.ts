@@ -78,7 +78,10 @@ declare module 'react-native-actions-sheet' {
         'notes': RouteDefinition
       };
     }>,
-    'watching-add-list-sheet': SheetDefinition,
+    'watching-add-list-sheet': SheetDefinition<{
+      payload: string[],
+      returnValue: string[]
+    }>,
     'watching-add-address-sheet': SheetDefinition,
     'watching-transaction-sheet': SheetDefinition,
     'watching-switch-list-sheet': SheetDefinition,

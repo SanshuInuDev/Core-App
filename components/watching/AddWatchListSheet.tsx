@@ -5,17 +5,18 @@ import Colors from "@/lib/Colors";
 import { fetchCoinsByMarketCap } from "@/lib/fetcher/client";
 import { useQuery } from "@tanstack/react-query";
 import { Text, TextInput, View, Image, TouchableOpacity } from "react-native";
-import { ScrollView, SheetManager } from "react-native-actions-sheet";
+import { ScrollView, SheetManager, SheetProps } from "react-native-actions-sheet";
 import SearchCryptoItem from "./SearchCryptoItem";
 import { useState } from "react";
 import { MarketCoin } from "@/lib/coingecko/types";
 import RadixIcon from "../RadixIcon";
 
-export default function AddWatchListSheet() {
+export default function AddWatchListSheet(props: SheetProps<"watching-add-list-sheet">) {
   const { data } = useQuery({
     queryKey: ['marketCap'],
     queryFn: fetchCoinsByMarketCap
   })
+  console.log(props.payload)
   const [query, setQuery] = useState<string>('')
   const [checked, setChecked] = useState<{ [key: string]: MarketCoin }>({})
   return (
@@ -39,7 +40,7 @@ export default function AddWatchListSheet() {
                   <SearchCryptoItem
                     data={item}
                     key={idx}
-                    checked={!!checked[item.symbol]}
+                    checked={!!checked[item.]}
                     onPress={() => {
                       const temp = { ...checked }
                       if (temp[item.symbol])
@@ -85,7 +86,9 @@ export default function AddWatchListSheet() {
         </View>
         <Button
           onPress={() => {
-            SheetManager.hide('watching-add-list-sheet')
+            SheetManager.hide('watching-add-list-sheet', {
+              payload: Object.keys(checked)
+            })
           }}
           className='w-full mt-4 mb-6'
         >

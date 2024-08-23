@@ -9,11 +9,11 @@ export default function MainWatchList() {
   return (
     <View>
       <View className='flex-row items-center'>
-        <TouchableOpacity 
-        className='flex-row items-center flex-1'
-        onPress={() => {
-          SheetManager.show('watching-switch-list-sheet')
-        }}
+        <TouchableOpacity
+          className='flex-row items-center flex-1'
+          onPress={() => {
+            SheetManager.show('watching-switch-list-sheet')
+          }}
         >
           <Text className='mr-2 text-white font-midnight-sans-st-36 text-5'>
             Main Watch List
@@ -24,8 +24,11 @@ export default function MainWatchList() {
         </TouchableOpacity>
         <TouchableOpacity
           className='items-center justify-center w-10 h-10 mr-2 rounded-full bg-base-200'
-          onPress={() => {
-            SheetManager.show('watching-add-list-sheet')
+          onPress={async () => {
+            const res = await SheetManager.show('watching-add-list-sheet', {
+              payload: ['address']
+            })
+            console.log("res", res)
           }}
         >
           <RadixIcon name='plus' size={16} color={Colors.white} />
