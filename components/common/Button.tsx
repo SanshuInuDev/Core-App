@@ -5,7 +5,7 @@ type Theme = 'dark' | 'light' | 'danger' | 'outline' | 'link'
 
 interface Props extends TouchableOpacityProps {
   theme?: Theme
-  children: string
+  children: string | string[]
   size?: 'default' | 'sm' | 'lg'
 }
 

@@ -81,3 +81,37 @@ interface Currency {
   slug: string
   url: string
 }
+
+export interface WatchListType {
+  created_at: string;
+  default: boolean | null;
+  id: number;
+  title: string;
+  userId: string | null;
+}
+
+export interface WatchListItemType {
+  coinId: string
+  created_at: string
+  id: number
+  watchListId: number | null
+}
+
+export interface WatchListItemResponse {
+  title: string
+  id: number
+  coins: string[]
+  items: CoinMarket[]
+}
+
+export interface UserWalletInfo {
+  address: string
+  addressId: number
+  username: string | null | undefined
+}
+
+export interface WatchAdressResponse {
+  title: string
+  id: number
+  items: UserWalletInfo[]
+}
