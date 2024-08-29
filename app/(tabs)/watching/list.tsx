@@ -4,7 +4,7 @@ import { router } from 'expo-router';
 import { View } from 'react-native';
 
 export default function WatchList() {
-
+  
   return (
     <View>
       <View className='flex-row p-1 mb-6 rounded-full bg-base-200'>

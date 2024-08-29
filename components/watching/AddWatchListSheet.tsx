@@ -7,7 +7,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Text, TextInput, View, Image, TouchableOpacity } from "react-native";
 import { ScrollView, SheetManager, SheetProps } from "react-native-actions-sheet";
 import SearchCryptoItem from "./SearchCryptoItem";
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { MarketCoin } from "@/lib/coingecko/types";
 import RadixIcon from "../RadixIcon";
 
@@ -16,9 +16,19 @@ export default function AddWatchListSheet(props: SheetProps<"watching-add-list-s
     queryKey: ['marketCap'],
     queryFn: fetchCoinsByMarketCap
   })
-  console.log(props.payload)
+
+  const coinLists = useMemo(() => {
+    const temp: { [key: string]: MarketCoin } = {}
+    if (data) {
+      data.forEach(item => {
+        temp[item.id] = item
+      })
+    }
+    return temp
+  }, [data])
+
   const [query, setQuery] = useState<string>('')
-  const [checked, setChecked] = useState<{ [key: string]: MarketCoin }>({})
+  const [checked, setChecked] = useState<string[]>(props.payload ?? [])
   return (
     <AppSheet>
       <View className='h-full'>
@@ -36,21 +46,26 @@ export default function AddWatchListSheet(props: SheetProps<"watching-add-list-s
           <View className="flex-1">
             {
               data?.filter(item => item.name.toLowerCase().includes(query.toLowerCase()))
-                .map((item, idx) => (
-                  <SearchCryptoItem
-                    data={item}
-                    key={idx}
-                    checked={!!checked[item.]}
-                    onPress={() => {
-                      const temp = { ...checked }
-                      if (temp[item.symbol])
-                        delete temp[item.symbol]
-                      else
-                        temp[item.symbol] = item
-                      setChecked(temp)
-                    }}
-                  />
-                ))
+                .map((item, idx) => {
+                  const checkedIndex = checked.indexOf(item.id)
+                  return (
+                    <SearchCryptoItem
+                      data={item}
+                      key={idx}
+                      checked={checkedIndex > -1}
+                      onPress={() => {
+                        if (checkedIndex > -1) {
+                          const temp = [...checked]
+                          temp.splice(checkedIndex, 1)
+                          setChecked(temp)
+                        } else {
+                          const temp = [...checked, item.id]
+                          setChecked(temp)
+                        }
+                      }}
+                    />
+                  )
+                })
             }
           </View>
         </ScrollView>
@@ -59,24 +74,27 @@ export default function AddWatchListSheet(props: SheetProps<"watching-add-list-s
             horizontal
           >
             {
-              Object.keys(checked).map(key => (
+              checked.map(key => (
                 <TouchableOpacity
                   key={key}
                   className="py-1.5 px-2 rounded-full items-center bg-base-200 mr-2.5 flex-row"
                   onPress={() => {
-                    const temp = { ...checked }
-                    delete temp[key]
-                    setChecked(temp)
+                    const checkedIndex = checked.indexOf(key)
+                    if (checkedIndex > -1) {
+                      const temp = [...checked]
+                      temp.splice(checkedIndex, 1)
+                      setChecked(temp)
+                    }
                   }}
                 >
                   <Image
-                    source={{ uri: checked[key].image }}
+                    source={{ uri: coinLists[key]?.image }}
                     width={16}
                     height={16}
                     className="rounded-full"
                   />
                   <Text className="mx-2 text-sm text-white font-midnight-sans-st-36">
-                    {checked[key].name}
+                    {coinLists[key]?.name}
                   </Text>
                   <RadixIcon color={Colors.white} size={16} name="cross-1" />
                 </TouchableOpacity>
@@ -87,12 +105,12 @@ export default function AddWatchListSheet(props: SheetProps<"watching-add-list-s
         <Button
           onPress={() => {
             SheetManager.hide('watching-add-list-sheet', {
-              payload: Object.keys(checked)
+              payload: checked
             })
           }}
           className='w-full mt-4 mb-6'
         >
-          Selected {`${Object.keys(checked).length}`} Token
+          Selected {`${checked.length}`} Token
         </Button>
       </View>
     </AppSheet>

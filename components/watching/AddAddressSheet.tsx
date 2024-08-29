@@ -2,10 +2,12 @@ import AppSheet from "@/components/AppSheet";
 import Button from "@/components/common/Button";
 import SheetCloseButton from "@/components/common/SheetCloseButton";
 import Colors from "@/lib/Colors";
+import { useState } from "react";
 import { Text, TextInput, View } from "react-native";
 import { SheetManager } from "react-native-actions-sheet";
 
 export default function AddAddressSheet() {
+  const [address, setAddress] = useState<string>('')
   return (
     <AppSheet>
       <View className='h-full'>
@@ -15,6 +17,8 @@ export default function AddAddressSheet() {
         </View>
         <TextInput
           placeholderTextColor={Colors.gray}
+          value={address}
+          onChangeText={setAddress}
           placeholder="/ Address, domain or identity "
           className="h-12 px-4 py-2 mb-6 text-white border rounded-full border-gray" />
         <Text className="flex-1 text-gray font-midnight-sans-st-36" >
@@ -22,7 +26,9 @@ export default function AddAddressSheet() {
         </Text>
         <Button
           onPress={() => {
-            SheetManager.hide('watching-add-address-sheet')
+            SheetManager.hide('watching-add-address-sheet', {
+              payload: address
+            })
           }}
           className='w-full mt-4 mb-6'
         >

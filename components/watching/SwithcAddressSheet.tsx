@@ -7,7 +7,7 @@ import { ScrollView, SheetManager, SheetProps } from "react-native-actions-sheet
 import RadixIcon from "../RadixIcon";
 
 
-export default function SwitchList(props: SheetProps<"watching-switch-list-sheet">) {
+export default function SwitchAddress(props: SheetProps<"watching-switch-list-sheet">) {
   return (
     <AppSheet>
       <View className='h-full'>
@@ -15,7 +15,7 @@ export default function SwitchList(props: SheetProps<"watching-switch-list-sheet
           <Text className='flex-1 text-white text-5 font-midnight-sans-st-36'>
             Watchlists
           </Text>
-          <SheetCloseButton id='watching-switch-list-sheet' />
+          <SheetCloseButton id='watching-switch-address-sheet' />
         </View>
         <ScrollView>
           {
@@ -24,7 +24,7 @@ export default function SwitchList(props: SheetProps<"watching-switch-list-sheet
                 className="flex-1 mb-2"
                 key={item.id}
                 onPress={() => {
-                  SheetManager.hide('watching-switch-list-sheet', {
+                  SheetManager.hide('watching-switch-address-sheet', {
                     payload: item
                   })
                 }}
@@ -33,21 +33,12 @@ export default function SwitchList(props: SheetProps<"watching-switch-list-sheet
                   <View className="">
                     <View className="flex-row">
                       <Image
-                        source={require('@/assets/images/bitcoin.png')}
+                        source={require('@/assets/images/avatar-1.png')}
                         width={24}
                         height={24}
                         className="rounded-full"
                       />
-                      <Image
-                        source={require('@/assets/images/Ethereum.png')}
-                        width={24}
-                        height={24}
-                        className="rounded-full ml-[-8] border-base-100"
-                      />
                     </View>
-                    <Text className="absolute justify-center w-8 h-5 mt-4 ml-1 text-xs text-center text-white rounded-full bg-base-200 font-midnight-sans-st-36">
-                      + 2
-                    </Text>
                   </View>
                   <Text className="flex-1 ml-2 text-sm text-white font-midnight-sans-st-36">
                     {item.title}

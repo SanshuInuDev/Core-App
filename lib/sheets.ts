@@ -11,8 +11,10 @@ import WalletConnectSheet from '@/components/portfolio/WalletConnectSheet';
 import AddAddressSheet from '@/components/watching/AddAddressSheet';
 import AddWatchListSheet from '@/components/watching/AddWatchListSheet';
 import SwitchList from '@/components/watching/SwitchListSheet';
+import SwitchAddress from '@/components/watching/SwithcAddressSheet';
 import TransactionSheet from '@/components/watching/TransactionSheet';
 import { RouteDefinition, SheetDefinition, registerSheet } from 'react-native-actions-sheet';
+import { WatchListType } from './types';
 
 /**
  * Registering the sheets here because otherwise sheet closes on
@@ -41,6 +43,7 @@ registerSheet('watching-add-list-sheet', AddWatchListSheet)
 registerSheet('watching-add-address-sheet', AddAddressSheet)
 registerSheet('watching-transaction-sheet', TransactionSheet)
 registerSheet('watching-switch-list-sheet', SwitchList)
+registerSheet('watching-switch-address-sheet', SwitchAddress)
 
 export { };
 
@@ -82,9 +85,18 @@ declare module 'react-native-actions-sheet' {
       payload: string[],
       returnValue: string[]
     }>,
-    'watching-add-address-sheet': SheetDefinition,
+    'watching-add-address-sheet': SheetDefinition<{
+      returnValue: string
+    }>,
     'watching-transaction-sheet': SheetDefinition,
-    'watching-switch-list-sheet': SheetDefinition,
+    'watching-switch-list-sheet': SheetDefinition<{
+      payload: WatchListType[],
+      returnValue: WatchListType
+    }>,
+    'watching-switch-address-sheet': SheetDefinition<{
+      payload: WatchListType[],
+      returnValue: WatchListType
+    }>,
   }
 }
 /**
