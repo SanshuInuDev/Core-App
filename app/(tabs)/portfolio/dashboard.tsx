@@ -11,6 +11,7 @@ import { SheetManager } from 'react-native-actions-sheet'
 
 export default function PortfolioDashboard() {
   const { address } = useAppProvider()
+  console.log("Myaddress", address)
   return (
     <View className='pb-28'>
       <TouchableOpacity
@@ -131,15 +132,20 @@ export default function PortfolioDashboard() {
           </View>
         </TouchableOpacity>
       </View>
-      <View className='mt-6'>
-        <CryptoPannel />
-      </View>
-      <View className='mt-4'>
-        <NftPannel />
-      </View>
-      <View className='mt-4'>
-        <TransactionPannel />
-      </View>
+      {
+        address &&
+        <>
+          <View className='mt-6'>
+            <CryptoPannel address={address} />
+          </View>
+          <View className='mt-4'>
+            <NftPannel address={address} />
+          </View>
+          <View className='mt-4'>
+            <TransactionPannel address={address} />
+          </View>
+        </>
+      }
     </View>
   )
 }

@@ -3,10 +3,14 @@ import { PortfolioNft } from "@/lib/types";
 import { useQuery } from "@tanstack/react-query";
 import { View, Text, Image } from "react-native";
 
-export default function NftPannel() {
-  const { address } = useAppProvider()
+type Props = {
+  address: string
+}
+export default function NftPannel({
+  address
+}: Props) {
   const { data } = useQuery({
-    queryKey: ['portfolio-nft'],
+    queryKey: [`portfolio-nft-${address}`],
     queryFn: async () => {
       const response = await fetch(process.env.EXPO_PUBLIC_SERVER_URL + '/api/v1/portfolio/nft/' + address)
       return await response.json() as PortfolioNft[]

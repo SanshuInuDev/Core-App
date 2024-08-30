@@ -9,10 +9,15 @@ import { FormattedNumber } from "react-intl"
 import { Image, Platform, Text, View } from 'react-native'
 import { twMerge } from 'tailwind-merge'
 
-export default function CryptoPannel() {
-  const { address } = useAppProvider()
+type Props = {
+  address: string
+}
+
+export default function CryptoPannel({
+  address
+}: Props) {
   const { data } = useQuery({
-    queryKey: ['portfolio-crypto'],
+    queryKey: [`portfolio-crypto-${address}`],
     queryFn: () => {
       if (address) return fetchCryptoPortfolio(address)
     }

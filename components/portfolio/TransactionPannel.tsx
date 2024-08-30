@@ -8,10 +8,15 @@ import React from 'react'
 import { FormattedNumber } from 'react-intl'
 import { Image, Text, View } from 'react-native'
 
-export default function TransactionPannel() {
-  const { address } = useAppProvider()
+type Props = {
+  address: string
+}
+
+export default function TransactionPannel({
+  address
+}: Props) {
   const { data } = useQuery({
-    queryKey: ['portfolio-transaction'],
+    queryKey: [`portfolio-transaction-${address}`],
     queryFn: async () => {
       const response = await fetch(process.env.EXPO_PUBLIC_SERVER_URL + '/api/v1/portfolio/transaction/' + address)
       return await response.json() as Transaction[]

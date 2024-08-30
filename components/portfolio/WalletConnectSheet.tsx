@@ -1,9 +1,9 @@
-import React from 'react'
 import AppSheet from '@/components/AppSheet'
-import { View, Text, Image } from 'react-native'
-import SheetCloseButton from '@/components/common/SheetCloseButton'
 import IconListArrowButton from '@/components/common/IconListArrowButton'
+import SheetCloseButton from '@/components/common/SheetCloseButton'
 import { router } from 'expo-router'
+import React from 'react'
+import { Image, Text, View } from 'react-native'
 import { SheetManager } from 'react-native-actions-sheet'
 
 export default function WalletConnectSheet() {

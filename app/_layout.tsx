@@ -16,12 +16,21 @@ import React, { useEffect } from 'react';
 import { IntlProvider } from 'react-intl';
 import { SheetProvider } from 'react-native-actions-sheet';
 import { SafeAreaView } from 'react-native-safe-area-context';
-
+import NetInfo from '@react-native-community/netinfo'
 import './global.css';
 import 'expo-dev-client';
 import AppProvider from '@/components/AppProvider';
 import Web3AuthProvider from '@/components/Web3AuthProvider';
+import { onlineManager } from '@tanstack/react-query'
 import WalletAuthModal from '@/components/more/WalletAuthModal';
+
+
+onlineManager.setEventListener((setOnline) => {
+  return NetInfo.addEventListener((state) => {
+    setOnline(!!state.isConnected)
+  })
+})
+
 
 // export {
 //   // Catch any errors thrown by the Layout component.
