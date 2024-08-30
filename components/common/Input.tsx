@@ -10,7 +10,7 @@ export default function Input(
       {...rest}
       placeholderTextColor={Colors.gray}
       className={twMerge(
-        "h-12 px-4 py-2 text-white border border-white rounded-full font-midnight-sans-st-36 text-sm",
+        "h-12 px-4 py-2 text-white border rounded-full font-midnight-sans-st-36 text-sm border-gray",
         cls
       )} />
   )

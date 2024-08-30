@@ -1,12 +1,16 @@
 import useAppProvider from '@/hooks/useAppProvider';
 import { EthereumPrivKeyProviderConfig, EthereumPrivateKeyProvider } from '@web3auth/ethereum-provider';
 import Web3Auth, { ChainNamespace, LOGIN_PROVIDER_TYPE } from "@web3auth/react-native-sdk";
-import { ethers } from 'ethers';
 import Constants, { AppOwnership } from "expo-constants";
 import * as Linking from "expo-linking";
 import * as SecureStore from "expo-secure-store";
 import * as WebBrowser from "expo-web-browser";
 import React, { createContext, useContext, useEffect } from 'react';
+import { createWalletClient, custom } from 'viem';
+import { mainnet } from 'viem/chains';
+import { createConfig, EVM } from '@lifi/sdk'
+
+
 
 const redirectUrl =
   //@ts-ignore
@@ -63,10 +67,21 @@ export default function Web3AuthProvider({
     async function init() {
       await web3auth.init();
       if (web3auth.privKey) {
+        console.log(web3auth.privKey)
         await ethereumPrivateKeyProvider.setupProvider(web3auth.privKey);
-        const ethersProvider = new ethers.BrowserProvider(ethereumPrivateKeyProvider);
-        const signer = await ethersProvider.getSigner();
-        const address = await signer.getAddress();
+        const walletClient = createWalletClient({
+          chain: mainnet,
+          transport: custom(ethereumPrivateKeyProvider)
+        });
+        const evmProvider = EVM({
+          getWalletClient: async () => walletClient,
+        })
+
+        createConfig({
+          integrator: 'truepartner312.sanshu',
+          providers: [evmProvider],
+        })
+        const [address] = await walletClient.getAddresses();
         setAddress(address)
       }
     }
@@ -85,15 +100,11 @@ export default function Web3AuthProvider({
 
       if (web3auth.privKey) {
         await ethereumPrivateKeyProvider.setupProvider(web3auth.privKey);
-        const ethersProvider = new ethers.BrowserProvider(ethereumPrivateKeyProvider);
-
-        // For ethers v5
-        // const signer = ethersProvider.getSigner();
-        const signer = await ethersProvider.getSigner();
-
-        // Get user's Ethereum public address
-        const address = await signer.getAddress();
-
+        const walletClient = createWalletClient({
+          chain: mainnet,
+          transport: custom(ethereumPrivateKeyProvider)
+        });
+        const [address] = await walletClient.getAddresses();
         setAddress(address)
       }
     } catch (error) {

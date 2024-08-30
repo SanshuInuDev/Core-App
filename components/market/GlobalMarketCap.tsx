@@ -10,7 +10,7 @@ type Props = {}
 export default function GlobalMarketCap({ }: Props) {
   const { data } = useQuery({
     queryKey: ['globalMarketCap'],
-    queryFn: fetchGlobalMarketData
+    queryFn: fetchGlobalMarketData,
   })
   const amount = data?.data.total_market_cap.usd ?? 0
   const percent = data?.data.market_cap_change_percentage_24h_usd ?? 0

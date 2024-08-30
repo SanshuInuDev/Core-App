@@ -7,6 +7,9 @@ import CryptoExchangeSheet from '@/components/portfolio/CryptoExchangeSheet';
 import ManualAddAssets from '@/components/portfolio/ManualAddAssets';
 import ManualAddPortfolioSheet from '@/components/portfolio/ManualAddPortfolioSheet';
 import PortfolioSelectSheet from '@/components/portfolio/PortfolioSelectSheet';
+import SendSheet from '@/components/portfolio/SendSheet';
+import SwapSheet from '@/components/portfolio/SwapSheet';
+import TransakSheet from '@/components/portfolio/TransakSheet';
 import WalletConnectSheet from '@/components/portfolio/WalletConnectSheet';
 import AddAddressSheet from '@/components/watching/AddAddressSheet';
 import AddWatchListSheet from '@/components/watching/AddWatchListSheet';
@@ -37,6 +40,9 @@ registerSheet('portfolio-select-sheet', PortfolioSelectSheet)
 registerSheet('portfolio-manual-add-sheet', ManualAddPortfolioSheet)
 registerSheet('portfolio-manual-add-assets-sheet', ManualAddAssets)
 
+registerSheet('portfolio-transak-sheet', TransakSheet)
+registerSheet('portfolio-send-sheet', SendSheet)
+registerSheet('portfolio-swap-sheet', SwapSheet)
 
 /** watching page */
 registerSheet('watching-add-list-sheet', AddWatchListSheet)
@@ -79,6 +85,22 @@ declare module 'react-native-actions-sheet' {
         'date': RouteDefinition
         'fee': RouteDefinition
         'notes': RouteDefinition
+      };
+    }>,
+    'portfolio-transak-sheet': SheetDefinition,
+    'portfolio-send-sheet': SheetDefinition<{
+      routes: {
+        'input': RouteDefinition
+        'select': RouteDefinition
+        'review': RouteDefinition
+        'complete': RouteDefinition
+      };
+    }>,
+    'portfolio-swap-sheet': SheetDefinition<{
+      routes: {
+        'input': RouteDefinition
+        'review': RouteDefinition
+        'complete': RouteDefinition
       };
     }>,
     'watching-add-list-sheet': SheetDefinition<{

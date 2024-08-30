@@ -1,12 +1,16 @@
 import RadixIcon from '@/components/RadixIcon';
 import Button from '@/components/common/Button';
+import Colors from '@/lib/Colors';
 import { SanshuServer } from '@/lib/fetcher/axios';
-import { WatchAdressResponse, WatchListItemResponse, WatchListType } from '@/lib/types';
+import { WatchAdressResponse, WatchListType } from '@/lib/types';
+import { formatLargeNumber, percentFormat } from '@/lib/utils';
 import { useQuery } from '@tanstack/react-query';
+import { router } from "expo-router";
 import { useEffect, useState } from 'react';
-import { Image, Text, TouchableOpacity, View } from 'react-native';
+import { FormattedNumber } from 'react-intl';
+import { Image, Platform, Text, TouchableOpacity, View } from 'react-native';
 import { SheetManager } from 'react-native-actions-sheet';
-import { Colors } from 'react-native/Libraries/NewAppScreen';
+import { twMerge } from 'tailwind-merge';
 
 export default function MainWatchAddress() {
   const [mainList, setMainList] = useState<WatchListType | undefined>()
@@ -71,7 +75,11 @@ export default function MainWatchAddress() {
       {
         watchlistItems.data?.data.items.length ?
           watchlistItems.data.data.items.map(item => (
-            <View key={item.addressId} className="flex-row items-center p-4 mt-4 border rounded-3xl border-gray">
+            <TouchableOpacity
+              onPress={() => {
+                router.push('/watching/' + item.address)
+              }}
+              key={item.addressId} className="flex-row items-center p-4 mt-4 border rounded-3xl border-gray">
               <View className="">
                 <View className="flex-row">
                   <Image
@@ -86,23 +94,32 @@ export default function MainWatchAddress() {
                 <Text className="flex-1 text-sm text-white font-midnight-sans-st-36">
                   {item.username ?? `${item.address?.substring(0, 3)}.${item.address?.substring(item.address.length - 5, item.address.length - 1)}`}
                 </Text>
-                <View className='flex-row'>
+                <View className='flex-row items-center'>
                   <Text className='mt-2 mr-2 text-sm text-gray font-midnight-sans-st-36'>
-                    {'$78,060.38'}
+                    {
+                      Platform.OS === 'web' ?
+                        <FormattedNumber value={item.usd_value ?? 0} style="currency" currency="USD" notation="compact" /> :
+                        formatLargeNumber(item.usd_value ?? 0)
+                    }
                   </Text>
-                  <View className='flex-row items-center justify-center'>
-                    <Text className='mt-2 text-sm text-green font-midnight-sans-st-36'>
-                      {'2.54%'}
+                  <View className="flex-row items-center justify-center mt-2 ml-1">
+                    <RadixIcon
+                      name={item.usd_change > 0 ? "triangle-up" : "triangle-down"}
+                      size={16}
+                      color={item.usd_change > 0 ? Colors.green : Colors.red}
+                    />
+                    <Text className={twMerge([
+                      "text-sm font-midnight-sans-st-36 text-right",
+                      item.usd_change > 0 ? "text-green " : "text-red"
+                    ])}>
+                      {percentFormat(item.usd_change)}
                     </Text>
-                    <View className='mt-2'>
-                      <RadixIcon size={16} color={Colors.green} name='triangle-up' />
-                    </View>
                   </View>
                 </View>
 
               </View>
               <RadixIcon name="caret-right" color={Colors.white} />
-            </View>
+            </TouchableOpacity>
           )) :
           <View className='items-center py-10 mt-4 border border-base-200 rounded-3xl'>
             <View className='flex-row'>

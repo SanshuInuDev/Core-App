@@ -22,6 +22,7 @@ import 'expo-dev-client';
 import AppProvider from '@/components/AppProvider';
 import Web3AuthProvider from '@/components/Web3AuthProvider';
 import { onlineManager } from '@tanstack/react-query'
+import WalletAuthModal from '@/components/more/WalletAuthModal';
 
 
 onlineManager.setEventListener((setOnline) => {
@@ -102,6 +103,7 @@ function RootLayoutNav() {
           </Stack>
         </SheetProvider>
       </SafeAreaView>
+      <WalletAuthModal />
     </ThemeProvider>
   );
 }

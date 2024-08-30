@@ -103,9 +103,11 @@ function CoinbaseExchange({ router: sheetRouter }: RouteScreenProps<"portfolio-c
 
 export default function CryptoExchangeSheet() {
   return (
-    <AppSheet routes={[
-      { name: 'exchnage-select', component: ExchangeSelete },
-      { name: 'coninbase-exchange', component: CoinbaseExchange }
-    ]} />
+    <AppSheet
+      routes={[
+        { name: 'exchnage-select', component: ExchangeSelete },
+        { name: 'coninbase-exchange', component: CoinbaseExchange }
+      ]}
+    />
   )
 }

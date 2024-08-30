@@ -8,7 +8,19 @@
       "distribution": "internal"
     },
     "preview": {
-      "distribution": "internal"
+      "android": {
+        "buildType": "apk"
+      },
+      "env": {
+        "EXPO_PUBLIC_SERVER_URL": "https://core-app-backend.vercel.app",
+        "EXPO_PUBLIC_COINGECKO_API": "CG-Pkmp2nzF5drgwkvbC4wVtsm4",
+        "EXPO_PUBLIC_CRYPTOPANIC_API": "54b9c4ec5db577b00bc094d840c7fdf181d5dd91",
+        "EXPO_PUBLIC_WEB3AUTH_CLIENT_ID": "BMtKZVdsWXpjNNLxuzbTE4gwxJlkO5wxP6x0nQoi0OfOMXSdDQTu4bmsyOiBrr9_CTJjAHGzmfS1uijvYbdSYp0",
+        "EXPO_PUBLIC_WALLET_CONNECT_PROJECT_ID": "e479133acb95ec1c5536d0a7e5faaa20",
+        "EXPO_PUBLIC_SUPABASE_URL": "https://dnlbkxckhwbefpzsfhnt.supabase.co",
+        "EXPO_PUBLIC_SUPABASE_API_KEY": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRubGJreGNraHdiZWZwenNmaG50Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTg0NTUzNDksImV4cCI6MjAzNDAzMTM0OX0.vagPT52vZDV66TnNmFrPiJnBiOe9txYt4Ueqm269M1o",
+        "EXPO_PUBLIC_TRANSAK_API": "b26e865b-3b2b-4186-a577-dbe1b79031dc"
+      }
     },
     "production": {}
   },

@@ -1,13 +1,19 @@
 import RadixIcon from '@/components/RadixIcon'
 import MoreButton from '@/components/common/MoreButton'
+import CryptoPannel from '@/components/portfolio/CryptoPannel'
+import NftPannel from '@/components/portfolio/NftPannel'
+import TransactionPannel from '@/components/portfolio/TransactionPannel'
 import useAppProvider from '@/hooks/useAppProvider'
 import Colors from '@/lib/Colors'
 import React from 'react'
 import { Image, Text, TouchableOpacity, View } from 'react-native'
 import { SheetManager } from 'react-native-actions-sheet'
+import { useLocalSearchParams, useGlobalSearchParams, Link } from 'expo-router';
+
 
 export default function WatchWallet() {
-  const { address } = useAppProvider()
+  const local = useLocalSearchParams();
+  const address = local.address as string
   return (
     <View className='pb-28'>
       <TouchableOpacity
@@ -17,7 +23,7 @@ export default function WatchWallet() {
       >
         <View className='flex-row items-center'>
           <Text className='mr-2 text-2xl text-white font-midnight-sans-st-36'>
-            {`${address?.substring(0, 3)}.${address?.substring(address.length - 5, address.length - 1)}`}
+            {address && `${address?.substring(0, 3)}.${address?.substring(address.length - 5, address.length - 1)}`}
           </Text>
           <View className='items-center justify-center w-6 h-6 border rounded-full border-gray'>
             <RadixIcon name='caret-sort' size={16} color={Colors.white} />
@@ -37,7 +43,7 @@ export default function WatchWallet() {
           </View>
         </View>
       </TouchableOpacity>
-      
+
       <View>
         <Image
           className='w-full'
@@ -99,7 +105,21 @@ export default function WatchWallet() {
           </View>
         </TouchableOpacity>
       </View>
-      <View className='flex-row items-center'>
+      {
+        address &&
+        <>
+          <View className='mt-6'>
+            <CryptoPannel address={address} />
+          </View>
+          <View className='mt-4'>
+            <NftPannel address={address} />
+          </View>
+          <View className='mt-4'>
+            <TransactionPannel address={address} />
+          </View>
+        </>
+      }
+      {/* <View className='flex-row items-center'>
         <Text className='flex-1 mt-6 text-white font-midnight-sans-st-36 text-5'>
           Assets
         </Text>
@@ -265,7 +285,7 @@ export default function WatchWallet() {
           </View>
           <Text className='text-sm text-white font-midnight-sans-st-36'>0.45 ETH</Text>
         </View>
-      </View>
+      </View> */}
     </View>
   )
 }

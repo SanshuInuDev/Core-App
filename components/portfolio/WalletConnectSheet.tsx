@@ -27,6 +27,10 @@ export default function WalletConnectSheet() {
             icon={<Image source={require('@/assets/images/TrustWallet.png')} />}
             title='Trust Wallet'
             addClassName='mt-2'
+            onPress={async () => {
+              await SheetManager.hide('portfolio-wallet-connect-sheet')
+              await SheetManager.show('portfolio-transak-sheet')
+            }}
           />
           <IconListArrowButton
             icon={<Image source={require('@/assets/images/WalletConnect.png')} />}
