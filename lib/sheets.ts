@@ -17,7 +17,7 @@ import SwitchList from '@/components/watching/SwitchListSheet';
 import SwitchAddress from '@/components/watching/SwithcAddressSheet';
 import TransactionSheet from '@/components/watching/TransactionSheet';
 import { RouteDefinition, SheetDefinition, registerSheet } from 'react-native-actions-sheet';
-import { WatchListType } from './types';
+import { Wallet, WatchListType } from './types';
 
 /**
  * Registering the sheets here because otherwise sheet closes on
@@ -73,7 +73,10 @@ declare module 'react-native-actions-sheet' {
         'coninbase-exchange': RouteDefinition
       };
     }>,
-    'portfolio-add-portfolio-sheet': SheetDefinition,
+    'portfolio-add-portfolio-sheet': SheetDefinition<{
+      payload: Wallet[],
+      returnValue: Wallet
+    }>,
     'portfolio-select-sheet': SheetDefinition,
     'portfolio-manual-add-sheet': SheetDefinition,
     'portfolio-manual-add-assets-sheet': SheetDefinition<{

@@ -176,3 +176,12 @@ export interface WatchAdressResponse {
   id: number
   items: UserWalletInfo[]
 }
+
+
+export interface Wallet {
+  address: string | null;
+  id: number;
+  title: string | null;
+  type: string | null;
+  userId: string | null;
+}
