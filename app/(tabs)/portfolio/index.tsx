@@ -1,8 +1,19 @@
 import IconList from '@/components/common/IconList';
 import PortfolioSelectButtonList from '@/components/portfolio/PortfolioSelectButtonList';
-import { Image, Text, View } from 'react-native';
+import { SanshuServer } from '@/lib/fetcher/axios';
+import { Wallet } from '@/lib/types';
+import { useQuery } from '@tanstack/react-query';
+import { router } from 'expo-router';
+import { Text, View } from 'react-native';
 
 export default function Portfolio() {
+  const wallets = useQuery({
+    queryKey: ['wallets'],
+    queryFn: () => SanshuServer.get<Wallet[]>('/wallet')
+  })
+
+  if (wallets.data?.data.length) router.push('/portfolio/dashboard')
+
   return (
     <View>
       <View>

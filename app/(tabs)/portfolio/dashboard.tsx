@@ -1,27 +1,41 @@
 import RadixIcon from '@/components/RadixIcon'
-import MoreButton from '@/components/common/MoreButton'
 import CryptoPannel from '@/components/portfolio/CryptoPannel'
 import NftPannel from '@/components/portfolio/NftPannel'
 import TransactionPannel from '@/components/portfolio/TransactionPannel'
-import useAppProvider from '@/hooks/useAppProvider'
 import Colors from '@/lib/Colors'
-import React from 'react'
+import { SanshuServer } from '@/lib/fetcher/axios'
+import { Wallet } from '@/lib/types'
+import { useQuery } from '@tanstack/react-query'
+import React, { useEffect, useState } from 'react'
 import { Image, Text, TouchableOpacity, View } from 'react-native'
 import { SheetManager } from 'react-native-actions-sheet'
 
 export default function PortfolioDashboard() {
-  const { address } = useAppProvider()
-  console.log("Myaddress", address)
+  const [wallet, setWallet] = useState<Wallet | null>(null)
+  const wallets = useQuery({
+    queryKey: ['wallets'],
+    queryFn: () => SanshuServer.get<Wallet[]>('/wallet')
+  })
+
+  useEffect(() => {
+    if (wallets.data?.data.length) {
+      setWallet(wallets.data?.data[0])
+    }
+  }, [wallets])
   return (
     <View className='pb-28'>
       <TouchableOpacity
-        onPress={() => {
-          SheetManager.show('portfolio-add-portfolio-sheet')
+        onPress={async () => {
+          const res = await SheetManager.show('portfolio-add-portfolio-sheet', {
+            payload: wallets.data?.data ?? []
+          })
+
+          if (res) setWallet(res)
         }}
       >
         <View className='flex-row items-center'>
           <Text className='mr-2 text-2xl text-white font-midnight-sans-st-36'>
-            {`${address?.substring(0, 3)}.${address?.substring(address.length - 4, address.length - 0)}`}
+            {wallet?.title}
           </Text>
           <View className='items-center justify-center w-6 h-6 border rounded-full border-gray'>
             <RadixIcon name='caret-sort' size={16} color={Colors.white} />
@@ -133,16 +147,16 @@ export default function PortfolioDashboard() {
         </TouchableOpacity>
       </View>
       {
-        address &&
+        wallet?.address &&
         <>
           <View className='mt-6'>
-            <CryptoPannel address={address} />
+            <CryptoPannel address={wallet.address} />
           </View>
           <View className='mt-4'>
-            <NftPannel address={address} />
+            <NftPannel address={wallet.address} />
           </View>
           <View className='mt-4'>
-            <TransactionPannel address={address} />
+            <TransactionPannel address={wallet.address} />
           </View>
         </>
       }
